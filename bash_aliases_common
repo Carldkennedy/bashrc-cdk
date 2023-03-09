@@ -1,0 +1,53 @@
+alias bashrc="echo "edit bashrc on github!"" #"vim ~/.bashrc && source ~/.bashrc"
+alias ale='echo -e "\033]8;url=https://github.com/Carldkennedy/bashrc-cdk/blob/main/bash_aliases\#L1-L10;${0##*/}\007edit bash_aliases on github!\033]8;;\007"'
+#alias ale=echo "edit bash_aliases on github!" #"vim ~/.bash_aliases && source ~/.bash_aliases"
+alias bl="cat ~/.bashrc | grep -o '.*()'"
+alias al="cat ~/.bash_aliases"
+alias sc="cat ~/.shortcuts_stanage"
+alias sce="vim ~/.shortcuts_stanage"
+alias scg="cat ~/.shortcuts_stanage | grep -i"
+
+alias ports='ss -plunt'
+alias nocomment="grep -Ev '''^(#|$)'''" ## Usage: nocomment /etc/squid.conf
+alias cl="clear"
+alias moduel="module"
+alias hello="clear;echo "QUOTA"; quota;logaodg; echo "BRANCHES"; git branch -vv;echo "STATUS"; git status; ls"
+alias mvlgs="[[ -d .logs ]] || mkdir .logs; mv *.e*[0-9] *.o*[0-9] .logs/"
+alias psaux="ps axo user:20,pid,pcpu,pmem,vsz,rss,tty,stat,start,time,comm"
+alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
+alias ssh-key-check='for file in /etc/ssh/*sa_key.pub; do ssh-keygen -lf "$file"; done'
+
+# ls aliases
+alias ls='ls --color=auto' ## Colorize the ls output
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias lsa="ls -lraht"
+alias lst="ls -la --time-style=full-isols -la --time-style=full-iso"
+alias cath="cat "$1" | column -t"
+alias catl="cat $(ls -t "$1"* | head -1)"
+
+# some more ls aliases
+alias cls="cd .. ;ls"
+alias ..='cd ..'; alias .2='cd ../../'; alias .3='cd ../../../'; alias .4='cd ../../../../' ; alias .5='cd ../../../../..'
+alias pd="pushd -0" #jump between last two directories
+# size and counts
+alias countfiles="du -a | cut -d/ -f2 | sort | uniq -c | sort -n" #r"
+alias sz0="du -hcs"; alias sz1="du -hcs */"; alias sz2="du -hcs */*"
+
+## git
+alias gits="git status"
+alias gitb="git branch"
+alias gita="git add -A; git status"
+alias gitc="git commit -m"
+alias logadog="git log --all --decorate --oneline --graph"
+alias gitkeep="find . -type d -empty -not -path "./.git/*" -exec touch {}/.gitkeep \;" # To add a .gitkeep file to all empty directories in current directory and all subdirectories
+alias gitlog="source ~/scr/utils/git_info.sh"
+# find ./* -size +100M | cat >> .gitignore ## git ignore large files
+
+# Tmux and screen
+alias tnew="-cwd tmux new -s $(basename $PWD)"
+alias told="tmux attach -t $(basename $PWD)"
+alias myses="tmux new-session -A -s mysession"
+alias back="screen -d -r; clear; git lgs; git status; ls"
+
