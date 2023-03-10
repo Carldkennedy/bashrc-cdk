@@ -1,8 +1,10 @@
-alias bashrc="echo "edit bashrc on github!"" #"vim ~/.bashrc && source ~/.bashrc"
-alias ale='echo -e "\033]8;url=https://github.com/Carldkennedy/bashrc-cdk/blob/main/bash_aliases\#L1-L10;${0##*/}\007edit bash_aliases on github!\033]8;;\007"'
-#alias ale=echo "edit bash_aliases on github!" #"vim ~/.bash_aliases && source ~/.bash_aliases"
-alias bl="cat ~/.bashrc | grep -o '.*()'"
-alias al="cat ~/.bash_aliases"
+# Common aliases
+alias bashrch="vim ~/bashrc-cdk/bashrc_"${hostname}" && source ~/bashrc-cdk/bashrc_"${hostname}""
+alias bashrc="vim ~/bashrc-cdk/bashrc_common && source ~/bashrc-cdk/bashrc_common"
+alias aleh="vim ~/bashrc-cdk/bash_aliases_"${hostname}" && source ~/bashrc-cdk/bash_aliases_"${hostname}""
+alias ale="vim ~/bashrc-cdk/bash_aliases_common && source ~/bashrc-cdk/bash_aliases_common"
+alias bl="echo -e '\n${hostname}' && cat ~/bashrc-cdk/bashrc_"${hostname}" | grep -o '.*()'&& echo -e '\nCOMMON' && cat ~/bashrc-cdk/bashrc_common | grep -o '.*()'"
+alias al="less ~/bashrc-cdk/bash_aliases_"${hostname}" && less ~/bashrc-cdk/bash_aliases_common"
 alias sc="cat ~/.shortcuts_stanage"
 alias sce="vim ~/.shortcuts_stanage"
 alias scg="cat ~/.shortcuts_stanage | grep -i"

@@ -1,3 +1,4 @@
+# Bessemer aliases
 alias Sstat="sstat --format=JobID,MaxRSS,MaxVMSize,AveCPU,AveRSS,AveVMSize --jobs="
 alias modnoeb="cd /usr/local/modulefiles/live/noeb" 
 alias modeb="cd /usr/local/modulefiles/live/eb/all" 

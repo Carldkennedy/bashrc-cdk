@@ -1,3 +1,4 @@
+# ShARC aliases
 alias snaps="cd /home/$USER/.snapshot"
 #Monitoring jobs
 alias monitor="qstat -j IS_none* | grep -b 'usage\|job_name'|column -t"

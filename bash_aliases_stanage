@@ -1,3 +1,4 @@
+# Stanage aliases
 alias Sstat="sstat --format=JobID,MaxRSS,MaxVMSize,AveCPU,AveRSS,AveVMSize --jobs="
 
 alias modeb="cd /opt/apps/testapps/common/modules" 
@@ -9,11 +10,10 @@ alias modstag="module use /opt/apps/testapps/el7/modules/staging/all/"
 alias modbegin="module purge; modall; modstag"
 alias mods="module spider"
 alias modt="module --mt MODULE_TABLE"
-MYMODULE="OpenMPI" && module spider $MYMODULE 2>&1 | grep "       " | sed  -e 's/^/module load /' | sed 's/  */ /g'
 #Easybuild
 alias easycfgs="cd /opt/apps/testapps/common/easybuild/EasyBuild/4.7.0/easybuild/easyconfigs/"
 alias cust="cd /opt/apps/testapps/common/easybuild/easyconfigs/stanage/easyconfigs"
-alias ebcfgs="echo "Where are the EasyBuild Configs?"" ### EasyBuild Configuration
+alias ebcfgs='echo "Where are the EasyBuild Configs"'
 alias modeasy="modbegin; module load EasyBuild/4.7.0"
 
 alias eb='echo NO EB!'
@@ -21,6 +21,6 @@ alias eb-bootstrap='"eb" --configfiles /opt/apps/testapps/common/module-system/e
 alias eb-live='"eb" --configfiles /opt/apps/testapps/el7/easybuild-configs/live/easybuild-config-native.cfg ' 
 alias eb-staging='"eb" --configfiles /opt/apps/testapps/el7/easybuild-configs/staging/easybuild-config-native.cfg '
 alias hooks="vim /opt/apps/testapps/common/easybuild/hooks/default.py"
-###### /opt/apps/testapps/media/eb-srcs                                               EASYBUILD SRCS tar.gz etc
-###### /opt/apps/testapps/common/easybuild/easyconfigs/stanage/easyconfigs/           EASYCONFIGS ALREADY INSTALLED
+# /opt/apps/testapps/media/eb-srcs                                               EASYBUILD SRCS tar.gz etc
+# /opt/apps/testapps/common/easybuild/easyconfigs/stanage/easyconfigs/           EASYCONFIGS ALREADY INSTALLED
 
