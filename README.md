@@ -21,6 +21,7 @@ There are aliases common across all hosts and a seperate file per specific host
 
 A few shorcuts:
 
-*al* lists aliases using less. Firstly host specific aliases, press q to then view common aliases.
-*bl* lists functions in bashrc for quick reference.
+**al** lists aliases using less. Firstly host specific aliases, press q to then view common aliases.
+
+**bl** lists functions in bashrc for quick reference.
 
