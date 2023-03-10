@@ -3,7 +3,7 @@
 Inspired and forked from https://github.com/jkwmoore/bashrc-jmoore 
 
 ##Structure
-bashrc-cdk/
+bashrc-cdk
     bash-setup.sh
 
     bashrc_common
