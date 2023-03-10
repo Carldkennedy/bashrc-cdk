@@ -2,7 +2,7 @@
 alias bashrch="vim ~/bashrc-cdk/bashrc_"${hostname}" && source ~/bashrc-cdk/bashrc_"${hostname}""
 alias bashrc="vim ~/bashrc-cdk/bashrc_common && source ~/bashrc-cdk/bashrc_common"
 alias aleh="vim ~/bashrc-cdk/bash_aliases_"${hostname}" && source ~/bashrc-cdk/bash_aliases_"${hostname}""
-alias ale="vim ~/bashrc-cdk/bash_aliases_common && source ~/bashrc-cdk/bash_aliases_common"
+alias ale="echo -e '\033]8;url=https://github.com/Carldkennedy/bashrc-cdk/edit/main/bash_aliases_common\033]8;;\007'"
 alias bl="echo -e '\n${hostname}' && cat ~/bashrc-cdk/bashrc_"${hostname}" | grep -o '.*()'&& echo -e '\nCOMMON' && cat ~/bashrc-cdk/bashrc_common | grep -o '.*()'"
 alias al="less ~/bashrc-cdk/bash_aliases_"${hostname}" && less ~/bashrc-cdk/bash_aliases_common"
 alias sc="cat ~/.shortcuts_${hostname}"
