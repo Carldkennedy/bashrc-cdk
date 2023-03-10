@@ -44,13 +44,13 @@ if [[ "$my_hostname" != "unknown" ]]; then
       if ! grep -Fxq ". ~/bashrc-cdk/bashrc_common" ~/.bashrc
       then
         # If not, add them to the .bashrc file
-        echo -e "\n# Load custom bashrc for common\n. ~/bashrc-cdk/bashrc_common" >> ~/.bashrc
+        echo -e "\n# Load custom common bashrc\n. ~/bashrc-cdk/bashrc_common" >> ~/.bashrc
       fi
 
       if ! grep -Fxq ". ~/bashrc-cdk/bash_aliases_common" ~/.bashrc
       then
         # If not, add them to the .bashrc file
-        echo -e "\n# Load custom bash aliases for common\n. ~/bashrc-cdk/bash_aliases_common" >> ~/.bashrc
+        echo -e "\n# Load custom common bash aliases\n. ~/bashrc-cdk/bash_aliases_common" >> ~/.bashrc
       fi
 
       if ! grep -Fq "~/bashrc-cdk/bash-setup.sh" ~/.bashrc

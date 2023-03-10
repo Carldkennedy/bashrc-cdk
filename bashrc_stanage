@@ -9,3 +9,7 @@ sacctu() {
 sstatu() {
             sstat --jobs="$1" --format=AveCPU,AveRSS,AveVMSize,JobID,MaxRSS,MaxVMSize,NTasks;
  }
+
+modl() {
+	    module spider "$1" 2>&1 | grep "       " | sed  -e 's/^/module load /' | sed 's/  */ /g'
+ }
