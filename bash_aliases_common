@@ -8,6 +8,7 @@ alias al="less ~/bashrc-cdk/bash_aliases_"${hostname}" && less ~/bashrc-cdk/bash
 alias sc="cat ~/.shortcuts_${hostname}"
 alias sce="vim ~/.shortcuts_${hostname}"
 alias scg="cat ~/.shortcuts_${hostname} | grep -i"
+alias uquota="df -h ~"
 
 alias ports='ss -plunt'
 alias nocomment="grep -Ev '''^(#|$)'''" ## Usage: nocomment /etc/squid.conf
