@@ -13,7 +13,7 @@ assign_hostname() {
 }
 # call function and assign hostname to variable
 my_hostname=$(assign_hostname)
-assign_hostname
+
 
 # check if hostname is known
 if [[ "$my_hostname" != "unknown" ]]; then
@@ -30,16 +30,16 @@ if [[ "$my_hostname" != "unknown" ]]; then
 
       ## HOST Specific
       # Check if the lines are already in the .bashrc file
-      if ! grep -Fxq ". ~/bashrc-cdk/bashrc_$hostname" ~/.bashrc
+      if ! grep -Fxq ". ~/bashrc-cdk/bashrc_$my_hostname" ~/.bashrc
       then
         # If not, add them to the .bashrc file
-        echo -e "\n# Load custom bashrc for $hostname\n. ~/bashrc-cdk/bashrc_$hostname" >> ~/.bashrc
+        echo -e "\n# Load custom bashrc for $my_hostname\n. ~/bashrc-cdk/bashrc_$my_hostname" >> ~/.bashrc
       fi
 
-      if ! grep -Fxq ". ~/bashrc-cdk/bash_aliases_$hostname" ~/.bashrc
+      if ! grep -Fxq ". ~/bashrc-cdk/bash_aliases_$my_hostname" ~/.bashrc
       then
         # If not, add them to the .bashrc file
-        echo -e "\n# Load custom bash aliases for $hostname\n. ~/bashrc-cdk/bash_aliases_$hostname" >> ~/.bashrc
+        echo -e "\n# Load custom bash aliases for $my_hostname\n. ~/bashrc-cdk/bash_aliases_$my_hostname" >> ~/.bashrc
       fi
       ## Common
       if ! grep -Fxq ". ~/bashrc-cdk/bashrc_common" ~/.bashrc
