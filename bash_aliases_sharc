@@ -1,0 +1,19 @@
+alias snaps="cd /home/$USER/.snapshot"
+#Monitoring jobs
+alias monitor="qstat -j IS_none* | grep -b 'usage\|job_name'|column -t"
+alias mon="qstat -j IS_none* | grep -b 'usage'|column -t"
+alias qstathr="find $SGE_ROOT/default/common/accounting -type f | xargs -t -n1 qacct -j -u $USER -f"
+alias qstath="find $SGE_ROOT/default/common/accounting-archive/ -mtime -10 -type f | xargs -t -n1 qacct -j -u $USER -f"
+alias Qstat="qstat -xml | tr '\n' ' ' | sed 's#<job_list[^>]*>#\n#g' | sed 's#<[^>]*>##g' | grep ' ' | column -t"
+alias qshw="qstat | grep -e hqw |  wc -l"
+alias qsr="qstat | grep -e all |  wc -l"
+alias job_scripts="cd /usr/local/sge/live/default/spool/qmaster/job_scripts/"
+alias aborted="cut -d':' -f5,6,11,12,13,40 $SGE_ROOT/default/common/accounting|sort -t: -k3 |grep :37|grep $USER|grep -v QRLOGIN|tail"
+alias abortnew="grep -v -f aborted.txt <(aborted)" #requires that aborted was written to aborted.txt previously
+alias completed="cut -d':' -f5,6,11,12,13,40 $SGE_ROOT/default/common/accounting|sort -t: -k3 |grep :0:|grep $USER|grep -v QRLOGIN|tail"
+#long queue     #  cl;qvar=`qsqw`; rvar=`qsr`; hqvar=`qshw` avar=`aborted -100|grep 744Z|wc -l`; echo "                                       Queued:$qvar    Running:$rvar   Held:$hqvar   Completed:$((28*10-$rvar-$qvar+$hqvar+4))  Aborted=$avar"
+
+alias mymods="modavail | grep exec"
+alias mymod="modavail | grep "
+alias modavail="module avail -t 2>&1"
+alias modulefind="modavail |& grep -i"

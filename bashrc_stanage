@@ -1,0 +1,11 @@
+source /opt/apps/testapps/el7/software/staging/Lmod/7.3/lmod/7.3/init/bash
+module use /opt/apps/testapps/common/modules/all/
+module use /opt/apps/testapps/el7/modules/staging/all/
+
+sacctu() {
+            sacct --user="$1" --format=Account,AveCPU,AveRSS,AveVMSize,CPUTime,Elapsed,ExitCode,JobID,JobName,MaxRSS,MaxVMSize,MaxDiskRead,MaxDiskWrite,ReqCPUS,ReqMem,ReqNodes,NCPUS,NNodes;
+ }
+
+sstatu() {
+            sstat --jobs="$1" --format=AveCPU,AveRSS,AveVMSize,JobID,MaxRSS,MaxVMSize,NTasks;
+ }

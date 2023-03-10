@@ -1,0 +1,29 @@
+qstatu() {
+         qstat -j "$1" | grep 'usage|/hard|';
+ }
+ 
+function qscript() {
+    job_script_file="/usr/local/sge/live/default/spool/qmaster/job_scripts/$1"
+
+    if [[ -f $job_script_file ]] && [[ $1 =~ ^-?[0-9]+$ ]]; then
+        cat "$job_script_file"
+    else
+        echo "Invalid SGE job id: $1" 1>&2
+        return 1
+    fi
+}
+
+function userinfo() {
+    cl;
+    echo -e "\n##################### Recently finished jobs ###################### \n"
+    find $SGE_ROOT/default/common/accounting -type f | xargs -t -n1 qacct -j -u $1 -f
+    echo -e "\n############################ ABORTED ############################## \n"
+    aborted $1
+    echo -e "\n################### User email in Job Scripts ##################### \n"
+    find /usr/local/sge/live/default/spool/qmaster/job_scripts/ -type f -print | xargs grep $1
+    echo -e "\n########################### Processes ############################# \n" 
+    ps aux | grep $1
+    echo -e "\n############################# qstat ############################### \n"
+    qstat -u $1
+}
+
