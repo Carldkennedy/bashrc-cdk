@@ -17,6 +17,7 @@ function qscript() {
 
 function userinfo() {
     cl;
+    uquota $1
     echo -e "\n##################### Recently finished jobs ###################### \n"
     find $SGE_ROOT/default/common/accounting -type f | xargs -t -n1 qacct -j -u $1 -f
     echo -e "\n############################ ABORTED ############################## \n"
