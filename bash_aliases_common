@@ -1,13 +1,12 @@
 # Common aliases
-alias bashrch="echo -e 'https://github.com/Carldkennedy/bashrc-cdk/edit/main/bashrc_${hostname}'"
-alias bashrc="echo -e 'https://github.com/Carldkennedy/bashrc-cdk/edit/main/bashrc_common'"
-alias aleh="echo -e 'https://github.com/Carldkennedy/bashrc-cdk/edit/main/bash_aliases_${hostname}'"
-alias alec="echo -e 'https://github.com/Carldkennedy/bashrc-cdk/edit/main/bash_aliases_common'"
+alias bashrc="echo -e 'https://github.com/Carldkennedy/bashrc-cdk/edit/main/bashrc_${hostname}\nhttps://github.com/Carldkennedy/bashrc-cdk/edit/main/bashrc_common'"
+alias ale="echo -e 'https://github.com/Carldkennedy/bashrc-cdk/edit/main/bash_aliases_${hostname}\nhttps://github.com/Carldkennedy/bashrc-cdk/edit/main/bash_aliases_common'"
 alias bl="echo -e '\n${hostname}' && cat ~/bashrc-cdk/bashrc_"${hostname}" | grep -o '.*()'&& echo -e '\nCOMMON' && cat ~/bashrc-cdk/bashrc_common | grep -o '.*()'"
-alias al="less ~/bashrc-cdk/bash_aliases_"${hostname}" && less ~/bashrc-cdk/bash_aliases_common"
-alias sc="cat ~/.shortcuts_${hostname}"
-alias sce="vim ~/.shortcuts_${hostname}"
-alias scg="cat ~/.shortcuts_${hostname} | grep -i"
+alias al="more ~/bashrc-cdk/bash_aliases_"${hostname}" ~/bashrc-cdk/bash_aliases_common"
+alias alg="cat ~/bashrc-cdk/bash_aliases_"${hostname}" ~/bashrc-cdk/bash_aliases_common |grep -i"
+alias sc="more ~/bashrc-cdk/sc_${hostname} ~/bashrc-cdk/sc_common"
+alias sce="echo -e 'https://github.com/Carldkennedy/bashrc-cdk/edit/main/sc_${hostname}\nhttps://github.com/Carldkennedy/bashrc-cdk/edit/main/sc_common'"
+alias scg="cat ~/bashrc-cdk/sc_${hostname} ~/bashrc-cdk/sc_common | grep -i"
 
 alias ports='ss -plunt'
 alias nocomment="grep -Ev '''^(#|$)'''" ## Usage: nocomment /etc/squid.conf
