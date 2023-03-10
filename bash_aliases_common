@@ -5,9 +5,9 @@ alias aleh="vim ~/bashrc-cdk/bash_aliases_"${hostname}" && source ~/bashrc-cdk/b
 alias ale="vim ~/bashrc-cdk/bash_aliases_common && source ~/bashrc-cdk/bash_aliases_common"
 alias bl="echo -e '\n${hostname}' && cat ~/bashrc-cdk/bashrc_"${hostname}" | grep -o '.*()'&& echo -e '\nCOMMON' && cat ~/bashrc-cdk/bashrc_common | grep -o '.*()'"
 alias al="less ~/bashrc-cdk/bash_aliases_"${hostname}" && less ~/bashrc-cdk/bash_aliases_common"
-alias sc="cat ~/.shortcuts_stanage"
-alias sce="vim ~/.shortcuts_stanage"
-alias scg="cat ~/.shortcuts_stanage | grep -i"
+alias sc="cat ~/.shortcuts_${hostname}"
+alias sce="vim ~/.shortcuts_${hostname}"
+alias scg="cat ~/.shortcuts_${hostname} | grep -i"
 
 alias ports='ss -plunt'
 alias nocomment="grep -Ev '''^(#|$)'''" ## Usage: nocomment /etc/squid.conf
