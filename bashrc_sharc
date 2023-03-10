@@ -27,6 +27,6 @@ function userinfo() {
     ps aux | grep $1
     echo -e "\n############################# qstat ############################### \n"
     qstat -u $1
-    df -h ~$1
+    eval df -h "~$1"
 }
 
