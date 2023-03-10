@@ -13,6 +13,7 @@ assign_hostname() {
 }
 # call function and assign hostname to variable
 my_hostname=$(assign_hostname)
+assign_hostname
 
 # check if hostname is known
 if [[ "$my_hostname" != "unknown" ]]; then
