@@ -18,6 +18,7 @@ alias mvlgs="[[ -d .logs ]] || mkdir .logs; mv *.e*[0-9] *.o*[0-9] .logs/"
 alias psaux="ps axo user:20,pid,pcpu,pmem,vsz,rss,tty,stat,start,time,comm"
 alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 alias ssh-key-check='for file in /etc/ssh/*sa_key.pub; do ssh-keygen -lf "$file"; done'
+alias grep='grep --color=auto'; alias egrep='egrep --color=auto'; alias fgrep='fgrep --color=auto'
 
 # ls aliases
 alias ls='ls --color=auto' ## Colorize the ls output
