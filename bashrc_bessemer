@@ -1,3 +1,5 @@
+module load git/2.39.2-GCCcore-10.3.0-nodocs
+
 sacctu() {
             sacct --user="$1" --format=Account,AveCPU,AveRSS,AveVMSize,CPUTime,Elapsed,ExitCode,JobID,JobName,MaxRSS,MaxVMSize,MaxDiskRead,MaxDiskWrite,ReqCPUS,ReqMem,ReqNodes,NCPUS,NNodes;
  }

@@ -1,3 +1,5 @@
+module load dev/git/2.39.2/gcc-4.9.4
+
 qstatu() {
          qstat -j "$1" | grep 'usage|/hard|';
  }
