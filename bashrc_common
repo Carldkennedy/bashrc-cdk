@@ -13,6 +13,9 @@ bkres() {
         mkdir -p ~/results/${name}/
         cp $1 ~/results/${name}/elements.dat
 }
+uquota() {
+         eval df -h "~$1"
+}
 
 mkcd() {
         mkdir "$1"; cd "$1";
