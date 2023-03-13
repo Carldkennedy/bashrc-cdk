@@ -1,6 +1,7 @@
 # Stanage aliases
 alias Sstat="sstat --format=JobID,MaxRSS,MaxVMSize,AveCPU,AveRSS,AveVMSize --jobs="
-
+alias cav='sinfo -o "%.30n %.20f %.20G %.20T %.20O %.20P %.10e"' # show cluster partition status
+  
 alias modeb="cd /opt/apps/testapps/common/modules" 
 alias modavail="module -t --redirect avail 2>&1"
 alias modulefind="module -t --redirect avail |& grep -i"
