@@ -24,8 +24,9 @@ modl() {
  	if [[ $# -eq 0 ]]; then
         	echo "Usage: modep <module_name>"
     	else
-		echo "Found in
+		echo -e "Found in modules:\n"
 	    	grep -rl "$1" /opt/apps/testapps/el7/modules/
-		module show "$1" |& grep load | sed -n 's/^load("\(.*\)")$/\1/p'
+		echo -e "Module loads:\n"
+	    	module show "$1" |& grep load | sed -n 's/^load("\(.*\)")$/\1/p'
 	fi
  }
