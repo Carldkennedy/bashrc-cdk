@@ -12,7 +12,7 @@ sstatu() {
  	if [[ $# -eq 0 ]]; then
         	echo "Usage: modep <module_name>"
     	else
-		echo -e "Found in modules:"
+		echo -e "Dependant modules:"
 	    	grep -rl "$1" /usr/local/modulefiles/
 		echo -e "\nModule loads:"
 	    	module show "$1" |& sed -n 's/^module\s\+load\s\+\(.*\)$/\1/p'
