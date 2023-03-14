@@ -29,6 +29,6 @@ modl() {
 		echo -e "\nModule loads:"
 	    	module show "$1" |& grep load | sed -n 's/^load("\(.*\)")$/\1/p'
 		echo -e "\nWhich then module loads:"
-		module show "$1" |& grep load | sed -n 's/^load("\(.*\)")$/\1/p' | while read line; do modep "$line"; done
+		module show "$1" |& grep load | sed -n 's/^load("\(.*\)")$/\1/p' | (read line; if [ -n "$line" ]; then echo "$line"; while read line; do modep "$line"; done; fi)
 	fi
  }
