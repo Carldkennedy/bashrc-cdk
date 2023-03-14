@@ -19,3 +19,11 @@ modl() {
 	    	module spider "$1" 2>&1 | grep "       " | sed  -e 's/^/module load /' | sed 's/  */ /g'
 	fi
  }
+ 
+ modep() {
+ 	if [[ $# -eq 0 ]]; then
+        	echo "Usage: modep <module_name>"
+    	else
+	    	grep -rl "$1" /opt/apps/testapps/el7/modules/
+	fi
+ }
