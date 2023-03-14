@@ -7,4 +7,15 @@ sacctu() {
 sstatu() {
             sstat --jobs="$1" --format=AveCPU,AveRSS,AveVMSize,JobID,MaxRSS,MaxVMSize,NTasks;
  }
+ 
+ modep() {
+ 	if [[ $# -eq 0 ]]; then
+        	echo "Usage: modep <module_name>"
+    	else
+		echo -e "Found in modules:"
+	    	grep -rl "$1" /usr/local/modulefiles/
+		echo -e "\nModule loads:"
+	    	module show "$1" |& grep load | sed -n 's/^load("\(.*\)")$/\1/p'
+	fi
+ }
 
