@@ -15,7 +15,7 @@ sstatu() {
 		echo -e "Found in modules:"
 	    	grep -rl "$1" /usr/local/modulefiles/
 		echo -e "\nModule loads:"
-	    	module show "$1" |& grep load | sed -n 's/^load("\(.*\)")$/\1/p'
+	    	module show "$1" |& sed -n 's/^module\s\+load\s\+\(.*\)$/\1/p'
 	fi
  }
 
