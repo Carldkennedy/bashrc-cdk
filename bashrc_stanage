@@ -13,5 +13,8 @@ sstatu() {
  }
 
 modl() {
-	    module spider "$1" 2>&1 | grep "       " | sed  -e 's/^/module load /' | sed 's/  */ /g'
+	if [[ $# -eq 0 ]]; then
+        	echo "Usage: modl <module_name>"
+    	else
+	    	module spider "$1" 2>&1 | grep "       " | sed  -e 's/^/module load /' | sed 's/  */ /g'
  }
