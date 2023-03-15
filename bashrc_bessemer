@@ -8,7 +8,7 @@ sstatu() {
             sstat --jobs="$1" --format=AveCPU,AveRSS,AveVMSize,JobID,MaxRSS,MaxVMSize,NTasks;
  }
  
- modep() {
+modep() {
  	if [[ $# -eq 0 ]]; then
         	echo "Usage: modep <module_name>"
     	else
