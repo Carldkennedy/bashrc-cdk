@@ -19,7 +19,6 @@ alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 alias ssh-key-check='for file in /etc/ssh/*sa_key.pub; do ssh-keygen -lf "$file"; done'
 alias grep='grep --color=auto'; alias egrep='egrep --color=auto'; alias fgrep='fgrep --color=auto'
 alias hgrep="history | grep"
-alias mkcd="mkdir -p && cd"
 
 # ls aliases
 alias ls='ls --color=auto' ## Colorize the ls output
