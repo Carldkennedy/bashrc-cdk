@@ -52,10 +52,13 @@ extract () {
      fi
 }
 
-#mksof()	{
-#	mkdir $1;
-#	cp install_template.sh "$1"/install.sh;
-#}
+gitd() {
+        eval "$(
+        git for-each-ref --shell --format \
+        "git --no-pager log -1 --date=iso --format='%%ad '%(align:left,55)%(refname:short)%(end)' %%h %%s' \$(git merge-base %(refname:short) master);" \
+        refs/heads
+        )" | sort
+}
 
 assign_hostname() {
   if [[ "$HOSTNAME" == *"bessemer"* ]]; then
