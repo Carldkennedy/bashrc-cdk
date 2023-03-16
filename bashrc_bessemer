@@ -1,7 +1,5 @@
 bashupd() {
-	module load git/2.39.2-GCCcore-10.3.0-nodocs;
-	source ~/bashrc-cdk/bash-setup.sh && source ~/.bahsrc;
-	module unload git/2.39.2-GCCcore-10.3.0-nodocs;
+	(module load git/2.39.2-GCCcore-10.3.0-nodocs && source ~/bashrc-cdk/bash-setup.sh && source ~/.bashrc && module unload git/2.39.2-GCCcore-10.3.0-nodocs;)
 }
 
 sacctu() {
