@@ -1,1 +1,2 @@
-df -h ~cs1cdk
+df -h ~cs1cdk                            # quota of a users home directory  
+find ./* -size +100M | cat >> .gitignore # git ignore large files
