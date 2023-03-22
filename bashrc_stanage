@@ -32,3 +32,15 @@ modep() {
         fi
  }
 
+lmodiff() {
+	module -t --redirect avail 2>&1 > cached_modules.txt
+	IFS=":" read -ra module_paths <<< "$MODULEPATH"
+	rm -f installed_modules.txt
+	for path in "${module_paths[@]}"; do
+	  find "$path" -type f -name "*.lua" -printf "%P\n" | sed "s/\.lua$//" | sed "s/\//\//g" >> installed_modules.txt
+	done
+	sort cached_modules.txt -o cached_modules.txt
+	sort installed_modules.txt -o installed_modules.txt
+	diff cached_modules.txt installed_modules.txt
+	rm cached_modules.txt installed_modules.txt
+{
