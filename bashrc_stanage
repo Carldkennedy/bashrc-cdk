@@ -59,13 +59,14 @@ modept_orig() {
         fi
  }
  
- modepx() {
-    deps=($(grep -rlZ "^    load(\"$1" /opt/apps/testapps/el7/modules/staging/ | awk -F"/" '{for(i=NF-1;i<=NF;i++) printf("%s/",$i)}' | sed 's/\.lua\///'))
+modepx() {
+    deps=($(grep -rl "^    load(\"$1" /opt/apps/testapps/el7/modules/staging/ | awk -F"/" '{printf("%s/%s\n", $(NF-1), $NF)}' | sed 's/\.lua$//' | sed 's|^/||'))
 
-    while IFS= read -r -d '' dep; do
+    while IFS="/" read -r dir file; do
+        dep="$dir/$file"
         echo "$dep"
         modepx "$dep"
-    done < <(printf '%s\0' "${deps[@]}")
+    done < <(printf '%s\n' "${deps[@]}")
 }
 
 modep() {
@@ -75,6 +76,7 @@ modep() {
         modepx "$module"
     done
 }
+
 
 lmodiff() {
 	module -t --redirect avail 2>&1 > cached_modules.txt
