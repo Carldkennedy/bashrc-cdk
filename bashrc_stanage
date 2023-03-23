@@ -43,6 +43,22 @@ modep() {
                 module show "$1" |& grep load | sed -n 's/^load("\(.*\)")$/\1/p' | grep -o ".*\/$1\/.*" | sort -u
         fi
  }
+ 
+ modep2() {
+    if [[ $# -eq 0 ]]; then
+        echo "Usage: modep <module_name>"
+    else
+        # find all directories containing the value of $1
+        for dir in $(find /opt/apps/testapps/el7/modules/staging/ -type f -name "*.lua" -exec grep -l "^module *.*\/$1\/.*" {} \; -exec dirname {} \; | sort -u); do
+            # print the directory
+            echo "$dir"
+            # print the modules loaded by the module in the directory
+            module show -p "$dir" | awk '/^load/ {print $2}' | sort -u
+        done
+    fi
+}
+
+ 
 
 lmodiff() {
 	module -t --redirect avail 2>&1 > cached_modules.txt
