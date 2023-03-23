@@ -30,3 +30,12 @@ function userinfo() {
     eval df -h "~$1"
 }
 
+function jobinfo() {
+    cl;
+    echo -e "\n###################### Failed jobs scripts ####################### \n"
+    qscript $1
+    echo -e "\n########################### In queue ############################# \n"
+    qstat -j $1 | grep -v queue
+    echo -e "\n########################## Finsihed job ########################## \n"
+    qacct -j $1
+}
