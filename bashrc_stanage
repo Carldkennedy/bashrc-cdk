@@ -43,20 +43,6 @@ modep() {
                 module show "$1" |& grep load | sed -n 's/^load("\(.*\)")$/\1/p' | grep -o ".*\/$1\/.*" | sort -u
         fi
  }
- 
- modep3() {
-        if [[ $# -eq 0 ]]; then
-                echo "Usage: modep <module_name>"
-        else
-		for dir in /opt/apps/testapps/el7/modules/staging/*/
-			grep -rl "^    load(\"$1" /opt/apps/testapps/el7/modules/staging/*/$dir/
-			num=$(grep -rl "^    load(\"$1" /opt/apps/testapps/el7/modules/staging/*/$dir/ | wc -l)
-			echo -e "are the $num dependant modules for version $dir."
-		done
-        fi
- }
- 
-
 
 lmodiff() {
 	module -t --redirect avail 2>&1 > cached_modules.txt
