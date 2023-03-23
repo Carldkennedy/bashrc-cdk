@@ -63,6 +63,9 @@ modepx() {
     deps=($(grep -rl "^    load(\"$1" /opt/apps/testapps/el7/modules/staging/ | awk -F"/" '{printf("%s/%s\n", $(NF-1), $NF)}' | sed 's/\.lua$//' | sed 's|^/||'))
 
     for dep in "${deps[@]}"; do
+    	if [[ "$dep" == *.bak* ]]; then
+            continue
+        fi
         dir=$(dirname "$dep")
         file=$(basename "$dep")
         echo "$dir/$file"
@@ -71,7 +74,7 @@ modepx() {
 }
 
 modep() {
-    modules=($(module -t --redirect avail 2>&1))
+    modules=($(module -t --redirect avail 2>&1 $1))
      for module in "${modules[@]}"; do
         echo "$module"
         modepx "$module"
