@@ -53,4 +53,4 @@ lmodiff() {
 	sort installed_modules.txt -o installed_modules.txt
 	diff cached_modules.txt installed_modules.txt
 	rm cached_modules.txt installed_modules.txt
-{
+ }
