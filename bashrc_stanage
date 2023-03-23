@@ -39,6 +39,8 @@ modep() {
                 echo -e "are the $num dependant modules."
                 echo -e "\nModule loads:"
                 module show "$1" |& grep load | sed -n 's/^load("\(.*\)")$/\1/p'
+		echo -e "\nModule loads:"
+                module show "$1" |& grep load | sed -n 's/^load("\(.*\)")$/\1/p' | grep -o ".*\/$1\/.*" | sort -u
         fi
  }
 
