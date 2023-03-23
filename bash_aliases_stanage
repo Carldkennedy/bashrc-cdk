@@ -14,7 +14,7 @@ alias modt="module --mt MODULE_TABLE"
 alias easycfgs="cd /opt/apps/testapps/common/easybuild/EasyBuild/4.7.0/easybuild/easyconfigs/"
 alias cust="cd /opt/apps/testapps/common/easybuild/easyconfigs/stanage/easyconfigs"
 alias ebcfgs='echo "Where are the EasyBuild Configs"'
-alias modeasy="modbegin; module load EasyBuild/4.7.0"
+alias modeasy="modbegin; module load EasyBuild"
 
 alias eb='echo NO EB!'
 alias eb-bootstrap='"eb" --configfiles /opt/apps/testapps/common/module-system/easybuild-config-module-system-bootstrap-only.cfg'
