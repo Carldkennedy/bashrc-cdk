@@ -62,11 +62,12 @@ modept_orig() {
 modepx() {
     deps=($(grep -rl "^    load(\"$1" /opt/apps/testapps/el7/modules/staging/ | awk -F"/" '{printf("%s/%s\n", $(NF-1), $NF)}' | sed 's/\.lua$//' | sed 's|^/||'))
 
-    while IFS="/" read -r dir file; do
-        dep="$dir/$file"
-        echo "$dep"
-        modepx "$dep"
-    done < <(printf '%s\n' "${deps[@]}")
+    for dep in "${deps[@]}"; do
+        dir=$(dirname "$dep")
+        file=$(basename "$dep")
+        echo "$dir/$file"
+        modepx "$dir/$file"
+    done
 }
 
 modep() {
