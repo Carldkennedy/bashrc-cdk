@@ -34,7 +34,7 @@ modep() {
         if [[ $# -eq 0 ]]; then
                 echo "Usage: modep <module_name>"
         else
-                grep -rl "$1" /opt/apps/testapps/el7/modules/staging/
+                grep -rl "^load(\"$1" /opt/apps/testapps/el7/modules/staging/
                 num=$(grep -rl "$1" /opt/apps/testapps/el7/modules/staging/ | wc -l)
                 echo -e "are the $num dependant modules."
                 echo -e "\nModule loads:"
