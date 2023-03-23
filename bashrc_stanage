@@ -11,6 +11,16 @@ sacctu() {
 sstatu() {
             sstat --jobs="$1" --format=AveCPU,AveRSS,AveVMSize,JobID,MaxRSS,MaxVMSize,NTasks;
  }
+ 
+jobinfo() {
+    echo -e "\n###################### Failed jobs scripts ####################### \n"
+    sacct --format="JobID,JobName%50,State,ExitCode,Start,End" --state=FAILED -j $1
+    echo -e "\n########################### In queue ############################# \n"
+    squeue -j $1
+    echo -e "\n########################## Finished jobs ########################## \n"
+    sacct --format="JobID,JobName%50,State,ExitCode,Start,End" --state=COMPLETED -j $1
+}
+
 
 modl() {
 	if [[ $# -eq 0 ]]; then
