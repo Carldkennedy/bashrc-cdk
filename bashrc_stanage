@@ -57,7 +57,7 @@ modepx() {
         local file=$(basename "$dep")
         local spaces=$(printf ' %.0s' $(seq 1 $depth))
         echo -e "${spaces}\e[${color}m$parent_name/$dir/$file\e[0m"
-        modepx "$dir/$file" "$max_depth" "$parent_name/$dir" "$((depth + 1))"
+        modepx "$dir/$file" "$max_depth" "$((depth + 1))"
     done
 }
 
