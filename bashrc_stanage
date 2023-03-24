@@ -24,40 +24,30 @@ modl() {
  }
  
 modep() {
-    local max_depth="$1"
-    local modules=($(module -t --redirect avail 2>&1))
-    for i in "${!modules[@]}"; do
-        local color=$((31 + i % 7))
-        echo -e "\e[${color}m${modules[i]}\e[0m"
-        modepx "${modules[i]}" "$max_depth" "${modules[i]}" 0
+    modules=($(module -t --redirect avail 2>&1 $1))
+     for module in "${modules[@]}"; do
+        echo "$module"
+        modepx "$module"
     done
 }
 
 modepx() {
-    local module_name="$1"
-    local max_depth="$2"
-    local parent_name="$3"
-    local color=31
-    local depth=0
-    if [[ -n "$4" ]]; then
-        depth=$4
-        if [[ $depth -gt $max_depth ]]; then
-            return
-        fi
-        color=$((31 + depth % 7))
-    fi
+    deps=($(grep -rl "^    load(\"$1" /opt/apps/testapps/el7/modules/staging/ | awk -F"/" '{printf("%s/%s\n", $(NF-1), $NF)}' | sed 's/\.lua$//' | sed 's|^/||'))
 
-    local deps=($(grep -rl "^    load(\"$module_name" /opt/apps/testapps/el7/modules/staging/ | awk -F"/" '{printf("%s/%s\n", $(NF-1), $NF)}' | sed 's/\.lua$//' | sed 's|^/||'))
+    if [[ -n "$2" ]]; then
+        color=$((31 + $2 % 7))
+    else
+        color=31
+    fi
 
     for dep in "${deps[@]}"; do
         if [[ "$dep" == *.bak* ]]; then
             continue
         fi
-        local dir=$(dirname "$dep")
-        local file=$(basename "$dep")
-        local spaces=$(printf ' %.0s' $(seq 1 $depth))
-        echo -e "${spaces}\e[${color}m$parent_name/$dir/$file\e[0m"
-        modepx "$dir/$file" "$max_depth" "$((depth + 1))"
+        dir=$(dirname "$dep")
+        file=$(basename "$dep")
+        echo -e " \e[${color}m$dir/$file\e[0m"
+        modepx "$dir/$file" $((color + 1))
     done
 }
 
