@@ -10,6 +10,7 @@ alias modstag="module use /opt/apps/testapps/el7/modules/staging/all/"
 alias modbegin="module purge; modall; modstag"
 alias mods="module spider"
 alias modt="module --mt MODULE_TABLE"
+alias modp="module purge"
 #Easybuild
 alias easycfgs="cd /opt/apps/testapps/common/easybuild/EasyBuild/4.7.1/easybuild/easyconfigs/"
 alias cust="cd /opt/apps/testapps/common/easybuild/easyconfigs/stanage/easyconfigs"
