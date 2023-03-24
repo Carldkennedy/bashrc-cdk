@@ -11,7 +11,7 @@ alias modbegin="module purge; modall; modstag"
 alias mods="module spider"
 alias modt="module --mt MODULE_TABLE"
 #Easybuild
-alias easycfgs="cd /opt/apps/testapps/common/easybuild/EasyBuild/4.7.0/easybuild/easyconfigs/"
+alias easycfgs="cd /opt/apps/testapps/common/easybuild/EasyBuild/4.7.1/easybuild/easyconfigs/"
 alias cust="cd /opt/apps/testapps/common/easybuild/easyconfigs/stanage/easyconfigs"
 alias ebcfgs='echo "Where are the EasyBuild Configs"'
 alias modeasy="modbegin; module load EasyBuild"
