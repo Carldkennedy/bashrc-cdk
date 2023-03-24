@@ -50,7 +50,7 @@ modepx() {
         fi
         dir=$(dirname "$dep")
         file=$(basename "$dep")
-        echo -e "\e[${color}m$dir/$file\e[0m"
+        echo -e " \e[${color}m$dir/$file\e[0m"
         modepx "$dir/$file" $((color + 1))
     done
 }
