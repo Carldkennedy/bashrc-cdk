@@ -68,7 +68,7 @@ modep() {
 			echo "$module"
 			modepx "$module"
 	   	done
-	done
+	fi
 }
 
 modepx() {
