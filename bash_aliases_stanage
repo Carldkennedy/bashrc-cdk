@@ -11,6 +11,8 @@ alias modbegin="module purge; modall; modstag"
 alias mods="module spider"
 alias modt="module --mt MODULE_TABLE"
 alias modp="module purge"
+alias modcache="/opt/apps/testapps/common/module-system/current/installation/Lmod/$LMOD_VERSION/lmod/lmod/libexec/Cache.lua"
+
 #Easybuild
 alias easycfgs="cd /opt/apps/testapps/common/easybuild/EasyBuild/4.7.1/easybuild/easyconfigs/"
 alias cust="cd /opt/apps/testapps/common/easybuild/easyconfigs/stanage/easyconfigs"
