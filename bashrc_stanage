@@ -71,22 +71,23 @@ modep() {
 modepx() {
     deps=($(grep -rl "^    load(\"$1" /opt/apps/testapps/el7/modules/staging/ | awk -F"/" '{printf("%s/%s\n", $(NF-1), $NF)}' | sed 's/\.lua$//' | sed 's|^/||'))
 
+    if [[ -n "$2" ]]; then
+        color=$((31 + $2 % 7))
+    else
+        color=31
+    fi
+
     for dep in "${deps[@]}"; do
         if [[ "$dep" == *.bak* ]]; then
             continue
         fi
         dir=$(dirname "$dep")
         file=$(basename "$dep")
-        color=$2
-        if [[ -n "$color" ]]; then
-            color=$((color + 1))
-        else
-            color=$((31 + RANDOM % 7))
-        fi
         echo -e "\e[${color}m$dir/$file\e[0m"
-        modepx "$dir/$file" "$color"
+        modepx "$dir/$file" $((color + 1))
     done
 }
+
 
 
 lmodiff() {
