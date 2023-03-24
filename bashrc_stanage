@@ -1,9 +1,3 @@
-#source /opt/apps/testapps/el7/software/staging/Lmod/7.3/lmod/7.3/init/bash
-#module use /opt/apps/testapps/common/modules/all/
-#module use /opt/apps/testapps/el7/modules/staging/all/
-
-module load git/2.39.2-GCCcore-12.2.0-nodocs
-
 sacctu() {
             sacct --user="$1" --format=Account,AveCPU,AveRSS,AveVMSize,CPUTime,Elapsed,ExitCode,JobID,JobName,MaxRSS,MaxVMSize,MaxDiskRead,MaxDiskWrite,ReqCPUS,ReqMem,ReqNodes,NCPUS,NNodes;
  }
@@ -20,7 +14,6 @@ jobinfo() {
     echo -e "\n########################## Finished jobs ########################## \n"
     sacct --format="JobID,JobName%50,State,ExitCode,Start,End" --state=COMPLETED -j $1
 }
-
 
 modl() {
 	if [[ $# -eq 0 ]]; then
@@ -61,8 +54,6 @@ modepx() {
         modepx "$dir/$file" $((color + 1))
     done
 }
-
-
 
 lmodiff() {
 	module -t --redirect avail 2>&1 > cached_modules.txt
