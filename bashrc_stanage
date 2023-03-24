@@ -61,10 +61,9 @@ modept_orig() {
  
 modep() {
     modules=($(module -t --redirect avail 2>&1 $1))
-    for i in "${!modules[@]}"; do
-        color=$((31 + i % 7))
-        echo -e "\e[${color}m${modules[i]}\e[0m"
-        modepx "${modules[i]}" "${color}"
+     for module in "${modules[@]}"; do
+        echo "$module"
+        modepx "$module"
     done
 }
 
