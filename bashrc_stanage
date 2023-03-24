@@ -60,11 +60,15 @@ modept_orig() {
  }
  
 modep() {
-    modules=($(module -t --redirect avail 2>&1 $1))
-     for module in "${modules[@]}"; do
-        echo "$module"
-        modepx "$module"
-    done
+   	if [[ $# -eq 0 ]]; then
+                echo "Usage: modep <module_name>"
+   	else
+	   	modules=($(module -t --redirect avail 2>&1 $1))
+	   	for module in "${modules[@]}"; do
+			echo "$module"
+			modepx "$module"
+	   	done
+	done
 }
 
 modepx() {
