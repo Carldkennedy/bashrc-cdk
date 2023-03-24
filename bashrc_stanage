@@ -44,14 +44,21 @@ modepx() {
         color=31
     fi
 
+    if [[ -n "$3" ]]; then
+        depth=$3
+    else
+        depth=0
+    fi
+
     for dep in "${deps[@]}"; do
         if [[ "$dep" == *.bak* ]]; then
             continue
         fi
         dir=$(dirname "$dep")
         file=$(basename "$dep")
-        echo -e " \e[${color}m$dir/$file\e[0m"
-        modepx "$dir/$file" $((color + 1))
+        spaces=$(printf ' %.0s' $(seq 1 $depth))
+        echo -e "${spaces}\e[${color}m$dir/$file\e[0m"
+        modepx "$dir/$file" $((color + 1)) $((depth + 1))
     done
 }
 
