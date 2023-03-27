@@ -14,7 +14,24 @@ jobinfo() {
     echo -e "\n########################## Finished jobs ########################## \n"
     sacct --format="JobID,JobName%50,State,ExitCode,Start,End" --state=COMPLETED -j $1
 }
- 
+
+userinfo() {
+    clear
+    echo -e "\n##################### Recently finished jobs ###################### \n"
+    sacct -u $1 --format=JobID,JobName,Partition,AllocCPUS,State,ExitCode,Start,End,Elapsed
+
+    echo -e "\n############################ CANCELLED ############################ \n"
+    sacct -u $1 --state CANCELLED --format=JobID,JobName,Partition,AllocCPUS,State,ExitCode,Start,End,Elapsed
+
+    echo -e "\n########################### Processes ############################# \n" 
+    ps aux | grep $1
+
+    echo -e "\n############################# squeue ############################## \n"
+    squeue -u $1
+
+    eval df -h "~$1"
+}
+
 modep() {
  	if [[ $# -eq 0 ]]; then
         	echo "Usage: modep <module_name>"
