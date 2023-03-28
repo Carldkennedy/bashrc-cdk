@@ -18,3 +18,5 @@ alias mymods="modavail | grep exec"
 alias mymod="modavail | grep "
 alias modavail="module avail -t 2>&1"
 alias modulefind="modavail |& grep -i"
+
+alias badnodes="bash /usr/local/scripts/qbadnodes"
