@@ -43,7 +43,7 @@ modl() {
 modep() {
     modules=($(module -t --redirect avail 2>&1 $1))
     modules_dir="${modules[0]}"
-    search_dir="${first_module%/*}"
+    search_dir="${modules_dir%/*}"
     for module in "${modules[@]}"; do
         echo "$module"
         modepx "$module" "$search_dir"
