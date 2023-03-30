@@ -78,5 +78,3 @@ modepx() { #Bessemr
         modepx "$dir/$file" "$2" $((color + 1)) 
     done
 }
-
-
