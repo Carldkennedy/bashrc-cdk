@@ -42,8 +42,8 @@ modep_old() {
 		echo -e "\nModule loads:"
 	    	module show "$1" |& sed -n 's/^module\s\+load\s\+\(.*\)$/\1/p'
 	fi
- }
- 
+}
+
 modep() { #Bessemer
     if [[ $# -eq 0 ]]; then
         	echo "Usage: modep <module_name>. This function is case sensitive!"
