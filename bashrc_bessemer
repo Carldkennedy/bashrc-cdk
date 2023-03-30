@@ -45,36 +45,36 @@ modep_old() {
 }
 
 modep() { #Bessemer
-    if [[ $# -eq 0 ]]; then
-        	echo "Usage: modep <module_name>. This function is case sensitive!"
-    	else
-    modules=($(module -t avail 2>&1 $1))
+	    if [[ $# -eq 0 ]]; then
+			echo "Usage: modep <module_name>. This function is case sensitive!"
+		else
+	    modules=($(module -t avail 2>&1 $1))
     
-    for module in "${modules[@]}"; do
-        echo "$module"
-        if [[ "$module" =~ ^([^/]+/){5,} ]]; then
-            search_dir="$(echo "$module" | cut -d/ -f1-6)"
-        fi
-        modepx "$module" "$search_dir"
-    done
+	    for module in "${modules[@]}"; do
+		echo "$module"
+		if [[ "$module" =~ ^([^/]+/){5,} ]]; then
+		    search_dir="$(echo "$module" | cut -d/ -f1-6)"
+		fi
+		modepx "$module" "$search_dir"
+	    done
 }
 
 modepx() { #Bessemr
-    deps=($(grep -rl "^    load(\"$1" "${2}/" | awk -F"/" '{printf("%s/%s\n", $(NF-1), $NF)}' | sed 's/\.lua$//' | sed 's|^/||'))
+	    deps=($(grep -rl "^    load(\"$1" "${2}/" | awk -F"/" '{printf("%s/%s\n", $(NF-1), $NF)}' | sed 's/\.lua$//' | sed 's|^/||'))
 
-    if [[ -n "$3" ]]; then
-        color=$((31 + $3 % 7))
-    else
-        color=31
-    fi
+	    if [[ -n "$3" ]]; then
+		color=$((31 + $3 % 7))
+	    else
+		color=31
+	    fi
 
-    for dep in "${deps[@]}"; do
-        if [[ "$dep" == *.bak* ]]; then
-            continue
-        fi
-        dir=$(dirname "$dep")
-        file=$(basename "$dep")
-        echo -e " \e[${color}m$dir/$file\e[0m"
-        modepx "$dir/$file" "$2" $((color + 1)) 
-    done
+	    for dep in "${deps[@]}"; do
+		if [[ "$dep" == *.bak* ]]; then
+		    continue
+		fi
+		dir=$(dirname "$dep")
+		file=$(basename "$dep")
+		echo -e " \e[${color}m$dir/$file\e[0m"
+		modepx "$dir/$file" "$2" $((color + 1)) 
+	    done
 }
