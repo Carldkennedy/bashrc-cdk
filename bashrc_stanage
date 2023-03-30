@@ -39,8 +39,38 @@ modl() {
 	    	module spider "$1" 2>&1 | grep "       " | sed  -e 's/^/module load /' | sed 's/  */ /g'
 	fi
  }
- 
+
 modep() {
+    modules=($(module -t --redirect avail 2>&1 $1))
+    modules_dir="${modules[0]}"
+    search_dir="${first_module%/*}"
+    for module in "${modules[@]}"; do
+        echo "$module"
+        modepx "$module" "" "$search_dir"
+    done
+}
+
+modepx() {
+    deps=($(grep -rl "^    load(\"$1" "${3}/" | awk -F"/" '{printf("%s/%s\n", $(NF-1), $NF)}' | sed 's/\.lua$//' | sed 's|^/||'))
+
+    if [[ -n "$2" ]]; then
+        color=$((31 + $2 % 7))
+    else
+        color=31
+    fi
+
+    for dep in "${deps[@]}"; do
+        if [[ "$dep" == *.bak* ]]; then
+            continue
+        fi
+        dir=$(dirname "$dep")
+        file=$(basename "$dep")
+        echo -e " \e[${color}m$dir/$file\e[0m"
+        modepx "$dir/$file" $((color + 1)) "$3"
+    done
+} 
+
+modep2() {
     modules=($(module -t --redirect avail 2>&1 $1))
      for module in "${modules[@]}"; do
         echo "$module"
@@ -48,7 +78,7 @@ modep() {
     done
 }
 
-modepx() {
+modepx2() {
     deps=($(grep -rl "^    load(\"$1" /opt/apps/testapps/el7/modules/staging/ | awk -F"/" '{printf("%s/%s\n", $(NF-1), $NF)}' | sed 's/\.lua$//' | sed 's|^/||'))
 
     if [[ -n "$2" ]]; then
