@@ -44,7 +44,7 @@ modep_old() {
 	fi
  }
  
- modep() { #Bessemer
+modep() { #Bessemer
     if [[ $# -eq 0 ]]; then
         	echo "Usage: modep <module_name>. This function is case sensitive!"
     	else
