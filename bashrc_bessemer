@@ -60,7 +60,7 @@ modep_old() {
 }
 
 modepx() { #Bessemr
-    deps=($(grep -rl "^    load(\"$1" "${2}/" | awk -F"/" '{printf("%s/%s\n", $(NF-1), $NF)}' | sed 's/\.lua$//' | sed 's|^/||'))
+    deps=($(grep -rl "^    load(\"$1" "${2}/" | awk -F"/" '{printf("%s/%s\n", $(NF-1), $NF)}' | sed 's/\.lua$//' | sed 's|^/||')))
 
     if [[ -n "$3" ]]; then
         color=$((31 + $3 % 7))
