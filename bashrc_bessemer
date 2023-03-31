@@ -41,6 +41,7 @@ modep() { #Bessemer
     			echo "Module not found. This function is case sensitive!"
     			return 1
 		   fi
+		   modules=($(module -t avail 2>&1 $1))
 		   for module in "${modules[@]}"; do
 			echo "$module"
 			num_slashes=$(echo "$module" | tr -dc '/' | wc -c)
