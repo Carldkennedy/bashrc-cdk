@@ -34,17 +34,17 @@ userinfo() {
 
 modep() { #Bessemer
 	    if [[ $# -eq 0 ]]; then
-			echo "Usage: modep <module_name>. This function is case sensitive!"
-		else
+		   echo "Usage: modep <module_name>. This function is case sensitive!"
+	    else
 		   modules=($(module -t avail 2>&1 $1))
 		   for module in "${modules[@]}"; do
 			echo "$module"
 			num_slashes=$(echo "$module" | tr -dc '/' | wc -c)
     			if [[ "$num_slashes" -ge 6 ]]; then
-			#if [[ "$module" =~ ^([^/]+/){5,} ]]; then
-			    search_dir="$(echo "$module" | cut -d/ -f1-6)"
-			fi
-			modepx "$module" "$search_dir"
+				search_dir="$(echo "$module" | cut -d/ -f1-6)"
+			else
+				modepx "$module" "$search_dir"
+		   	fi
 		   done
 	    fi
 }
