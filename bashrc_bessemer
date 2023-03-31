@@ -52,7 +52,9 @@ modep() { #Bessemer
 
 		    for module in "${modules[@]}"; do
 			echo "$module"
-			if [[ "$module" =~ ^([^/]+/){5,} ]]; then
+			num_slashes=$(echo "$module" | tr -dc '/' | wc -c)
+    			if [[ "$num_slashes" -ge 5 ]]; then
+			#if [[ "$module" =~ ^([^/]+/){5,} ]]; then
 			    search_dir="$(echo "$module" | cut -d/ -f1-6)"
 			fi
 			modepx "$module" "$search_dir"
