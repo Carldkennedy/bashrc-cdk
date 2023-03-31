@@ -37,6 +37,7 @@ modep() { #Bessemer
 		   echo "Usage: modep <module_name>. This function is case sensitive!"
 	    else
 		   modules=($(module -t avail 2>&1 $1))
+		   search_dir="$(echo "${module[0]}" | cut -d/ -f1-6)"
 		   for module in "${modules[@]}"; do
 			echo "$module"
 			num_slashes=$(echo "$module" | tr -dc '/' | wc -c)
