@@ -37,8 +37,11 @@ modep() { #Bessemer
 			echo "Usage: modep <module_name>. This function is case sensitive!"
 		else
 		    modules=($(module -t avail 2>&1 $1))
-
-		    for module in "${modules[@]}"; do
+		    if ! printf '%s\n' "${modules[@]}" | grep -qE '^[^/]+/[^/]+$'; then
+    			echo "Module not found. This function is case sensitive!"
+    			exit 1
+		   fi
+		   for module in "${modules[@]}"; do
 			echo "$module"
 			num_slashes=$(echo "$module" | tr -dc '/' | wc -c)
     			if [[ "$num_slashes" -ge 6 ]]; then
