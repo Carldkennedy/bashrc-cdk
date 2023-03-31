@@ -38,7 +38,7 @@ modep() { # A function to display available modules and their dependencies
         echo "Usage: modep <module_name>. This function is case sensitive!"
     else
         modules=($(module -t avail 2>&1 $1)) # Get a list of available modules matching the provided name
-        for module in "${modules[@]:1}"; do # For each available module
+        for module in "${modules[@]}"; do # For each available module
             echo "$module" # Print the module name
             num_slashes=$(echo "$module" | tr -dc '/' | wc -c) # Count the number of slashes in the module name to see if it's a path
             if [[ "$num_slashes" -ge 6 ]]; then # If there are at least 6 slashes in the name i.e it's in /usr/local/modulefiles/*/eb/
