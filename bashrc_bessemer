@@ -43,8 +43,9 @@ modep() { #Bessemer
     			if [[ "$num_slashes" -ge 6 ]]; then
 				search_dir="$(echo "$module" | cut -d/ -f1-6)"
 			else
-				modepx "$module" "$search_dir"
-		   	fi
+				continue
+			fi
+			modepx "$module" "$search_dir"
 		   done
 	    fi
 }
