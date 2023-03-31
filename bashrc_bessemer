@@ -39,18 +39,18 @@ modep() { # A function to display available modules and their dependencies
     else
         modules=($(module -t avail 2>&1 $1)) # Get a list of available modules matching the provided name
         for module in "${modules[@]}"; do # For each available module
-            
-            num_slashes=$(echo "$module" | tr -dc '/' | wc -c) # Count the number of slashes in the module name to see if it's a path
-            if [[ "$num_slashes" -ge 6 ]]; then # If there are at least 6 slashes in the name i.e it's in /usr/local/modulefiles/*/eb/
-                search_dir="$(echo "$module" | cut -d/ -f1-6)" # Set the search directory to the everything before the first 6 slashes
-            else  
-				if [[ "$num_slashes" == 5 ]]; then
-					continue
-				else
-                			echo "$module" # Print the module name
-					modepx "$module" "$search_dir" # Otherwise, call the modepx function with the module name and search directory
-				fi
-            fi
+	    num_slashes=$(echo "$module" | tr -dc '/' | wc -c) # Count the number of slashes in the module name to see if it's a path
+		    
+	    if [[ "$num_slashes" == 5 ]]; then
+			continue
+            else
+		    echo "$module" # Print the module name
+		    if [[ "$num_slashes" -ge 6 ]]; then # If there are at least 6 slashes in the name i.e it's in /usr/local/modulefiles/*/eb/
+			search_dir="$(echo "$module" | cut -d/ -f1-6)" # Set the search directory to the everything before the first 6 slashes
+		    else  
+			modepx "$module" "$search_dir" # Otherwise, call the modepx function with the module name and search directory
+
+		    fi
         done
     fi
 }
