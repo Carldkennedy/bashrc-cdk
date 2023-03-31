@@ -36,11 +36,6 @@ modep() { #Bessemer
 	    if [[ $# -eq 0 ]]; then
 			echo "Usage: modep <module_name>. This function is case sensitive!"
 		else
-		    modules=($(module -t avail 2>&1 $1))
-		    if ! printf '%s\n' "${modules[@]}" | grep -qE '^[^/]+/[^/]+$'; then
-    			echo "Module not found. This function is case sensitive!"
-    			return 1
-		   fi
 		   modules=($(module -t avail 2>&1 $1))
 		   for module in "${modules[@]}"; do
 			echo "$module"
@@ -50,7 +45,7 @@ modep() { #Bessemer
 			    search_dir="$(echo "$module" | cut -d/ -f1-6)"
 			fi
 			modepx "$module" "$search_dir"
-		    done
+		   done
 	    fi
 }
 
