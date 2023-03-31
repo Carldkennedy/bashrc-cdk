@@ -32,43 +32,43 @@ userinfo() {
     eval df -h "~$1"
 }
 #Bess
-modep() { # A function to display available modules and their dependencies
-    if [[ $# -eq 0 ]]; then # If no arguments are provided
+modep() { 
+    if [[ $# -eq 0 ]]; then 
         echo "Usage: modep <module_name>. This function is case sensitive!"
     else
-        modules=($(module -t avail 2>&1 $1)) # Get a list of available modules matching the provided name
-        for module in "${modules[@]}"; do # For each available module
+        modules=($(module -t avail 2>&1 $1)) 
+        for module in "${modules[@]}"; do 
 
-            num_slashes=$(echo "$module" | tr -dc '/' | wc -c) # Count the number of slashes in the module name to see if it's a path
-            if [[ "$num_slashes" -ge 6 ]]; then # If there are at least 6 slashes in the name i.e it's in /usr/local/modulefiles/*/eb/
-                search_dir="$(echo "$module" | cut -d/ -f1-6)" # Set the search directory to the everything before the first 6 slashes
+            num_slashes=$(echo "$module" | tr -dc '/' | wc -c) 
+            if [[ "$num_slashes" -ge 6 ]]; then 
+                search_dir="$(echo "$module" | cut -d/ -f1-6)" 
             else
                                 if [[ "$num_slashes" == 5 ]]; then
                                         continue
                                 else
                                         echo "$module" # Print the module name
-                                        modepx "$module" "$search_dir" # Otherwise, call the modepx function with the module name and search directory
+                                        modepx "$module" "$search_dir" 
                                 fi
             fi
         done
     fi
 }
 
-modepx() { # A recursive function to display a module's dependencies
-    deps=($(grep -rl "^    module load ${1}" "${2}/" | awk -F"/" '{printf("%s/%s\n", $(NF-1), $NF)}' | sed 's|^/||')) # Get a list of the module's dependencies
-    if [[ -n "$3" ]]; then # If a color value is provided
-        color=$((31 + $3 % 7)) # Set the color value based on the provided value
+modepx() { 
+    deps=($(grep -rl "^    module load ${1}" "${2}/" | awk -F"/" '{printf("%s/%s\n", $(NF-1), $NF)}' | sed 's|^/||')) 
+    if [[ -n "$3" ]]; then 
+        color=$((31 + $3 % 7)) 
     else
-        color=31 # Otherwise, set the color to the default value of 31
+        color=31 
     fi
-    for dep in "${deps[@]}"; do # For each dependency
-        if [[ "$dep" == *.bak* ]]; then # If the dependency is a backup file
-            continue # Skip it
+    for dep in "${deps[@]}"; do 
+        if [[ "$dep" == *.bak* ]]; then 
+            continue 
         fi
-        dir=$(dirname "$dep") # Get the directory name of the dependency
-        file=$(basename "$dep") # Get the file name of the dependency
-        echo -e " \e[${color}m$dir/$file\e[0m" # Print the dependency name in the specified color
-        modepx "$dir/$file" "$2" $((color + 1)) # Call the modepx function recursively with the dependency name, search directory, and incremented color value
+        dir=$(dirname "$dep") 
+        file=$(basename "$dep") 
+        echo -e " \e[${color}m$dir/$file\e[0m" 
+        modepx "$dir/$file" "$2" $((color + 1)) 
     done
 }
 
