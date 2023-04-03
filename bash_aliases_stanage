@@ -18,6 +18,7 @@ alias easycfgs="cd /opt/apps/testapps/common/easybuild/EasyBuild/4.7.1/easybuild
 alias cust="cd /opt/apps/testapps/common/easybuild/easyconfigs/stanage/easyconfigs"
 alias ebcfgs='echo "Where are the EasyBuild Configs"'
 alias modeasy="modbegin; module load EasyBuild"
+alias deadmodsym="find /opt/apps/testapps/el7/modules/ -type l -print0 | xargs -0 -n1 sh -c 'test ! -e "$0" && echo "$0"'"
 
 alias eb='echo NO EB!'
 alias eb-bootstrap='"eb" --configfiles /opt/apps/testapps/common/module-system/easybuild-config-module-system-bootstrap-only.cfg'
