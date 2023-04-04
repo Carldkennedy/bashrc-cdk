@@ -40,35 +40,52 @@ modl() {
 	fi
  }
 
-modep() {
+# Searches for available modules and their reverse dependencies
+moduleDependencies() {
+    # Get a list of available modules with the provided name
     modules=($(module -t --redirect avail 2>&1 $1))
-    modules_dir="${modules[0]}"
-    search_dir="${modules_dir%/*}"
+
+    # Get the directory where the modules are stored
+    modulesDir="${modules[0]}"
+    searchDir="${modulesDir%/*}"
+
+    # Loop through the list of available modules and search for their dependencies
     for module in "${modules[@]}"; do
+        # Print the module name
         echo "$module"
-        modepx "$module" "$search_dir"
+        # Search for the dependencies of the current module
+        moduleDependenciesRecursive "$module" "$searchDir"
     done
 }
 
-modepx() {
+# Searches for the reverse dependencies of a given module
+moduleDependenciesRecursive() {
+    # Search for files in the provided directory that contain the string "load(<module_name>"
     deps=($(grep -rl "^    load(\"$1" "${2}/" | awk -F"/" '{printf("%s/%s\n", $(NF-1), $NF)}' | sed 's/\.lua$//' | sed 's|^/||'))
 
+    # Determine the color to use for the output
     if [[ -n "$3" ]]; then
         color=$((31 + $3 % 7))
     else
         color=31
     fi
 
+    # Loop through the list of dependencies and search for their dependencies recursively
     for dep in "${deps[@]}"; do
+        # Skip files with ".bak" in their name
         if [[ "$dep" == *.bak* ]]; then
             continue
         fi
+        # Separate the directory and file name from the path
         dir=$(dirname "$dep")
         file=$(basename "$dep")
+        # Print the dependency with the determined color
         echo -e " \e[${color}m$dir/$file\e[0m"
-        modepx "$dir/$file" "$2" $((color + 1)) 
+        # Search for the dependencies of the current dependency
+        moduleDependenciesRecursive "$dir/$file" "$2" $((color + 1)) 
     done
 } 
+
 
 lmodiff() {
 	module -t --redirect avail 2>&1 > cached_modules.txt
