@@ -32,7 +32,7 @@ userinfo() {
     eval df -h "~$1"
 }
 #Bess
-modep() { 
+modep2() { 
     if [[ $# -eq 0 ]]; then 
         echo "Usage: modep <module_name>. This function is case sensitive!"
     else
@@ -72,4 +72,56 @@ modepx() {
     done
 }
 
+# This function takes the name of a module as input argument and displays its dependencies recursively.
+moduleDependencies() { 
+    # Check if module name is provided as input argument
+    if [[ $# -eq 0 ]]; then 
+        # Display usage if no module name is provided
+        echo "Usage: moduleDependencies <moduleName>. This function is case sensitive!"
+    else
+        # Retrieve available modules using `module` command and loop over each of them
+        modules=($(module -t avail 2>&1 $1)) 
+        for module in "${modules[@]}"; do 
+            # Get the number of slashes in the module name
+            num_slashes=$(echo "$module" | tr -dc '/' | wc -c) 
+            # Set search directory as the first 6 directories in the module path if number of slashes is greater than or equal to 6
+            if [[ "$num_slashes" -ge 6 ]]; then 
+                search_dir="$(echo "$module" | cut -d/ -f1-6)" 
+            # Skip the module if number of slashes is 5
+            else
+                if [[ "$num_slashes" == 5 ]]; then
+                    continue
+                # If number of slashes is less than 5, print the module name and recursively call the second function `moduleDependenciesRecursive`
+                else
+                    echo "$module" # Print the module name
+                    moduleDependenciesRecursive "$module" "$search_dir" 
+                fi
+            fi
+        done
+    fi
+}
+
+# This function takes the name of a module and a search directory as input arguments and recursively displays its dependencies.
+moduleDependenciesRecursive() { 
+    # Search for files that load the given module using `grep` command, and extract the corresponding directory and file names using `awk` and `sed`
+    dependencies=($(grep -rl "^    module load ${1}" "${2}/" | awk -F"/" '{printf("%s/%s\n", $(NF-1), $NF)}' | sed 's|^/||')) 
+    # Set the color of the output based on the depth in the dependency tree
+    if [[ -n "$3" ]]; then 
+        color=$((31 + $3 % 7)) 
+    else
+        color=31 
+    fi
+    # Loop over each dependency, print it with a color, and recursively call this function with the dependency file and directory as input arguments, along with an incremented color value.
+    for dependency in "${dependencies[@]}"; do 
+        # Skip files with `.bak` extension
+        if [[ "$dependency" == *.bak* ]]; then 
+            continue 
+        fi
+        directory=$(dirname "$dependency") 
+        file=$(basename "$dependency") 
+        echo -e " \e[${color}m$directory/$file\e[0m" 
+        moduleDependenciesRecursive "$directory/$file" "$2" $((color + 1)) 
+    done
+}
+alias modep="moduleDependencies"
 
