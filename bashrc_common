@@ -57,13 +57,25 @@ extract () {
      fi
 }
 
-gitd() {
-        eval "$(
-        git for-each-ref --shell --format \
-        "git --no-pager log -1 --date=iso --format='%%ad '%(align:left,55)%(refname:short)%(end)' %%h %%s' \$(git merge-base %(refname:short) master);" \
+# Get the most recent commit date, commit hash, and commit message for each branch, as well as the branch name
+# and the hash of the merge base between the branch and main
+getBranchCommits() {
+    # Use `git for-each-ref` to get information for each branch
+    git for-each-ref --shell --format \
+        # For each branch, run a `git log` command to get the most recent commit information
+        "git --no-pager log -1 --date=iso --format='%%ad '%(align:left,55)%(refname:short)%(end)' %%h %%s' \$(git merge-base %(refname:short) main);" \
         refs/heads
-        )" | sort
 }
+
+# Sort the output of `getBranchCommits` by commit date
+sortBranchCommits() {
+    # Call `getBranchCommits` and pipe the output to `sort`
+    getBranchCommits | sort
+}
+
+# Define an alias `gitd` to print a table of the most recent commit information for each branch
+alias gitd='sortBranchCommits'
+
 
 assign_hostname() {
   if [[ "$HOSTNAME" == *"bessemer"* ]]; then
