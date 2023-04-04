@@ -11,6 +11,7 @@ alias modbegin="module purge; modall; modstag"
 alias mods="module spider"
 alias modt="module --mt MODULE_TABLE"
 alias modp="module purge"
+alias modep="moduleDependencies"
 alias modcache="/opt/apps/testapps/common/module-system/current/installation/Lmod/$LMOD_VERSION/lmod/lmod/libexec/Cache.lua"
 
 #Easybuild
