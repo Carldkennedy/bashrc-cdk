@@ -38,6 +38,7 @@ alias pd="pushd -0" #jump between last two directories
 # size and counts
 alias countfiles="du -a | cut -d/ -f2 | sort | uniq -c | sort -n" #r"
 alias sz0="du -hcs"; alias sz1="du -hcs */"; alias sz2="du -hcs */*"
+alias sza="du -had 1"; # include hidden
 
 ## git
 alias gits="git status"
