@@ -4,7 +4,7 @@ alias modnoeb="cd /usr/local/modulefiles/live/noeb"
 alias modeb="cd /usr/local/modulefiles/live/eb/all" 
 alias modulefind="module avail |& grep -i"
 alias modavail="module avail -t"
-alias modstag="module use /usr/local/modulefiles/staging/eb/all"
+alias modstag="module unuse /usr/local/modulefiles/live/eb/all; module unuse /usr/local/modulefiles/live/noeb; module unuse /usr/local/modulefiles/staging/eb-znver3/all/; module use /usr/local/modulefiles/staging/eb/all; module load EasyBuild/4.6.1-staging"
 
 #Easybuild
 alias easycfgs="cd /usr/local/packages/common/EasyBuild/4.4.0/easybuild/easyconfigs"
