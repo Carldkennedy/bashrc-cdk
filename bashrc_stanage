@@ -2,10 +2,11 @@ sacctu() {
             sacct --user="$1" --format=Account,AveCPU,AveRSS,AveVMSize,CPUTime,Elapsed,ExitCode,JobID,JobName,MaxRSS,MaxVMSize,MaxDiskRead,MaxDiskWrite,ReqCPUS,ReqMem,ReqNodes,NCPUS,NNodes;
  }
 
-sstatu() {
-            sstat --jobs="$1" --format=AveCPU,AveRSS,AveVMSize,JobID,MaxRSS,MaxVMSize,NTasks;
- }
- 
+# Function to get stats of a specific job in a cluster environment
+getClusterJobStats() {
+    sstat --jobs="$jobID" --format=AveCPU,AveRSS,AveVMSize,JobID,MaxRSS,MaxVMSize,NTasks;
+}
+
 jobinfo() {
     echo -e "\n###################### Failed jobs scripts ####################### \n"
     sacct --format="JobID,JobName%50,State,ExitCode,Start,End" --state=FAILED -j $1
