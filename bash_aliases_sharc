@@ -13,6 +13,7 @@ alias aborted="cut -d':' -f5,6,11,12,13,40 $SGE_ROOT/default/common/accounting|s
 alias abortnew="grep -v -f aborted.txt <(aborted)" #requires that aborted was written to aborted.txt previously
 alias completed="cut -d':' -f5,6,11,12,13,40 $SGE_ROOT/default/common/accounting|sort -t: -k3 |grep :0:|grep $USER|grep -v QRLOGIN|tail"
 #long queue     #  cl;qvar=`qsqw`; rvar=`qsr`; hqvar=`qshw` avar=`aborted -100|grep 744Z|wc -l`; echo "                                       Queued:$qvar    Running:$rvar   Held:$hqvar   Completed:$((28*10-$rvar-$qvar+$hqvar+4))  Aborted=$avar"
+alias myses="qstat -j \$(qstat | awk '/QRLOGIN/ {print \$1}') -f  | grep -v queue"
 
 alias mymods="modavail | grep exec"
 alias mymod="modavail | grep "
