@@ -14,4 +14,3 @@ alias cust="echo '/usr/local/packages/live/eb/etc/tuos/easyconfigs'"
 alias ebcfgs="cd /usr/local/modulefiles/common/EasyBuild" ### EasyBuild Configuration
 ## scontrol show job <jobid>                ## scontrol show -dd job <jobid> to have Slurm display the content of the submission script it stored, 
 ## scontrol write batch_script <jobid>      ## and in newer versions of Slurm (17.11 and after). Only works for self?
-
