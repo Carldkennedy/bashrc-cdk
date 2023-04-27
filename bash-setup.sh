@@ -18,7 +18,9 @@ my_hostname=$(assign_hostname)
 # check if hostname is known
 if [[ "$my_hostname" != "unknown" ]]; then
   echo "Hostname is $my_hostname"
-    
+    # save current working directory
+    pushd . > /dev/null
+
     # Clone the repository to the user's home directory first.
 
     cd ~/bashrc-cdk && git pull > /dev/null 2>&1 && 
@@ -68,4 +70,6 @@ else
   echo "Hostname is unknown. Exiting script."
   exit 1
 fi
+# restore current working directory
+popd > /dev/null
 
