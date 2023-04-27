@@ -10,7 +10,7 @@ alias partition_util="sinfo -o "%.18P %.8a %.8D %.4t %.10C %.6f %.6u %.4m %.20E"
 
 #Easybuild
 alias easycfgs="cd /usr/local/packages/common/EasyBuild/4.4.0/easybuild/easyconfigs"
-alias cust="echo '/usr/local/packages/live/eb/etc/tuos/easyconfigs'"
+alias cust='echo /usr/local/packages/live/eb/etc/tuos/easyconfigs'
 alias ebcfgs="cd /usr/local/modulefiles/common/EasyBuild" ### EasyBuild Configuration
 ## scontrol show job <jobid>                ## scontrol show -dd job <jobid> to have Slurm display the content of the submission script it stored, 
 ## scontrol write batch_script <jobid>      ## and in newer versions of Slurm (17.11 and after). Only works for self?
