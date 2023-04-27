@@ -31,6 +31,15 @@ userinfo() {
 
     eval df -h "~$1"
 }
+
+ml() {
+  if [ $# -eq 0 ]; then
+    module list
+  else
+    module load "$1"
+  fi
+}
+
 #Bess
 modep2() { 
     if [[ $# -eq 0 ]]; then 
