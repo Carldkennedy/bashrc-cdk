@@ -238,3 +238,38 @@ sysinfo() {
   echo "Top 5 processes by memory usage:"
   ps aux --sort=-%mem | head -6
 }
+
+easyconfig_dependency_tree() {
+    if [ $# -ne 1 ]; then
+        echo "Usage: easyconfig_dependency_tree <easyconfig_file>"
+        return 1
+    fi
+
+    local easyconfig_file="$1"
+
+    if [ ! -f "$easyconfig_file" ]; then
+        echo "File not found: $easyconfig_file"
+        return 1
+    fi
+
+    _print_dependency_tree() {
+        local file="$1"
+        local prefix="${2:-}"
+
+        local dependencies=$(grep "^dependencies" "$file" | awk -F'[' '{print $2}' | awk -F']' '{print $1}' | sed -e 's/[()]//g' -e 's/"//g' | tr ',' ' ')
+        for dep in $dependencies; do
+            echo "${prefix}$dep"
+            local dep_easyconfig_file=$(find $EASYBUILD_ROBOT_PATHS -name "${dep}*.eb" -print -quit)
+            if [ ! -z "$dep_easyconfig_file" ]; then
+                _print_dependency_tree "$dep_easyconfig_file" "$prefix  "
+            fi
+        done
+    }
+
+    echo "Dependency tree for $easyconfig_file:"
+    _print_dependency_tree "$easyconfig_file"
+}
+alias edt="easyconfig_dependency_tree"
+
+
+
