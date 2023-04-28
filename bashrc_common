@@ -256,10 +256,14 @@ easyconfig_dependency_tree() {
         local file="$1"
         local prefix="${2:-}"
 
-        local dependencies=$(grep "^dependencies" "$file" | awk -F'[' '{print $2}' | awk -F']' '{print $1}' | sed -e 's/[()]//g' -e 's/"//g' | tr ',' ' ')
+        local dependencies=$(grep "^ *dependencies" "$file" | grep -oP '\[\K[^\]]+')
+        dependencies=$(echo $dependencies | sed -e 's/[()]//g' -e 's/"//g' -e 's/,/ /g')
+
         for dep in $dependencies; do
             echo "${prefix}$dep"
-            local dep_easyconfig_file=$(find $EASYBUILD_ROBOT_PATHS -name "${dep}*.eb" -print -quit)
+            local dep_name=$(echo $dep | awk -F',' '{print $1}')
+            local dep_version=$(echo $dep | awk -F',' '{print $2}')
+            local dep_easyconfig_file=$(find $EASYBUILD_ROBOT_PATHS -type f -name "${dep_name}-${dep_version}*.eb" -print -quit)
             if [ ! -z "$dep_easyconfig_file" ]; then
                 _print_dependency_tree "$dep_easyconfig_file" "$prefix  "
             fi
@@ -269,7 +273,7 @@ easyconfig_dependency_tree() {
     echo "Dependency tree for $easyconfig_file:"
     _print_dependency_tree "$easyconfig_file"
 }
-alias edt="easyconfig_dependency_tree"
+
 
 
 
