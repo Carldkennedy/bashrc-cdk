@@ -241,11 +241,11 @@ sysinfo() {
 
 easyconfig_dependency_tree() {
     if [ $# -ne 1 ]; then
-        echo "Usage: easyconfig_dependency_tree <easyconfig_file> ex. /f/foss/foss-2022a.eb"
+        echo "Usage: easyconfig_dependency_tree <easyconfig_file>"
         return 1
     fi
 
-    local easyconfig_file="$EASYBUILD_ROBOT_PATHS/$1"
+    local easyconfig_file="$1"
 
     if [ ! -f "$easyconfig_file" ]; then
         echo "File not found: $easyconfig_file"
