@@ -256,6 +256,10 @@ easyconfig_dependency_tree() {
         local file="$1"
         local prefix="${2:-}"
 
+        local toolchain=$(grep "^ *toolchain" "$file" | grep -oP '\{\K[^\}]+')
+        local toolchain_name=$(echo $toolchain | awk -F',' '{print $1}' | awk -F':' '{print $2}' | tr -d ' ')
+        local toolchain_version=$(echo $toolchain | awk -F',' '{print $2}' | awk -F':' '{print $2}' | tr -d ' ')
+
         local dependencies=$(grep "^ *dependencies" "$file" | grep -oP '\[\K[^\]]+')
         dependencies=$(echo $dependencies | sed -e 's/[()]//g' -e 's/"//g' -e 's/,/ /g')
 
@@ -263,7 +267,9 @@ easyconfig_dependency_tree() {
             echo "${prefix}$dep"
             local dep_name=$(echo $dep | awk -F',' '{print $1}')
             local dep_version=$(echo $dep | awk -F',' '{print $2}')
-            local dep_easyconfig_file=$(find $EASYBUILD_ROBOT_PATHS -type f -name "${dep_name}-${dep_version}*.eb" -print -quit)
+            local dep_name_lc=$(echo $dep_name | tr '[:upper:]' '[:lower:]')
+            local dep_version_underscored=$(echo $dep_version | tr '.' '_')
+            local dep_easyconfig_file=$(find $EASYBUILD_ROBOT_PATHS -type f -name "${dep_name_lc}-${dep_version_underscored}-${toolchain_name}${toolchain_version}.eb" -print -quit)
             if [ ! -z "$dep_easyconfig_file" ]; then
                 _print_dependency_tree "$dep_easyconfig_file" "$prefix  "
             fi
@@ -273,6 +279,7 @@ easyconfig_dependency_tree() {
     echo "Dependency tree for $easyconfig_file:"
     _print_dependency_tree "$easyconfig_file"
 }
+
 
 
 
