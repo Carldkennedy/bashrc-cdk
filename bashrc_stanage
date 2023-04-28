@@ -1,3 +1,6 @@
+# Easyconfig path for easyconfig_dependency_tree function
+export EASYBUILD_ROBOT_PATHS="/opt/apps/testapps/common/easybuild/EasyBuild/4.7.1/easybuild/easyconfigs"
+
 sacctu() {
             sacct --user="$1" --format=Account,AveCPU,AveRSS,AveVMSize,CPUTime,Elapsed,ExitCode,JobID,JobName,MaxRSS,MaxVMSize,MaxDiskRead,MaxDiskWrite,ReqCPUS,ReqMem,ReqNodes,NCPUS,NNodes;
  }
