@@ -4,6 +4,7 @@ alias cav='sinfo -o "%.30n %.20f %.20G %.20T %.20O %.20P %.10e"' # show cluster 
 alias partition_util='sinfo -o "%.18P %.8a %.8D %.4t %.10C %.6f %.6u %.4m %.20E"'
 alias myses='squeue -j $SLURM_JOB_ID --format="%.18i %.9P %.50j %.8u %.8T %.10M %.6D %.6C %.12R %.12m %.8G %.6t"'
 alias quota='quota -s'
+alias gpu_state='sinfo -p gpu -N -O "NodeList,Available,Gres,GresUsed,CPUsState"'
 
 alias modeb="cd /opt/apps/testapps/common/modules" 
 alias modavail="module -t --redirect avail 2>&1"
