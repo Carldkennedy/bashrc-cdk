@@ -1,5 +1,6 @@
 # Bessemer aliases
 alias Sstat="sstat --format=JobID,MaxRSS,MaxVMSize,AveCPU,AveRSS,AveVMSize --jobs="
+alias sq="while true; do clear; squeue -u $USER --long ; sleep 5; done"
 alias myses='squeue -j $SLURM_JOB_ID --format="%.18i %.9P %.50j %.8u %.8T %.10M %.6D %.6C %.12R %.12m %.8G %.6t"'
 alias modnoeb="cd /usr/local/modulefiles/live/noeb" 
 alias modeb="cd /usr/local/modulefiles/live/eb/all" 
