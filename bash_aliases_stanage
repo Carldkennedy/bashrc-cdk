@@ -7,6 +7,8 @@ alias quota='quota -s'
 alias gpu_state='sinfo -p gpu -N -O "NodeList,Available,Gres,GresUsed,CPUsState"'
 alias sq="while true; do clear; SQ ; sleep 5; done"
 alias SQ='squeue -u $USER --format="%.7i %.9P %.20j %.8u %.2t %.10M %.6D %12R %10C %10m %12l %12L %Z"'
+alias sh='srun --cpus-per-task=12 --partition=gpu --qos=gpu --reservation=gpu-h100 --gres=gpu:h100:1 --pty /bin/bash'
+alias sa='srun --cpus-per-task=12 --partition=gpu --qos=gpu --mem=82G --gres=gpu:a100:1  --pty bash'
 
 alias modeb="cd /opt/apps/testapps/common/modules" 
 alias modavail="module -t --redirect avail 2>&1"
