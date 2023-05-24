@@ -5,7 +5,7 @@ alias partition_util='sinfo -o "%.18P %.8a %.8D %.4t %.10C %.6f %.6u %.4m %.20E"
 alias myses='squeue -j $SLURM_JOB_ID --format="%.18i %.9P %.50j %.8u %.8T %.10M %.6D %.6C %.12R %.12m %.8G %.6t"'
 alias quota='quota -s'
 alias gpu_state='sinfo -p gpu -N -O "NodeList,Available,Gres,GresUsed,CPUsState"'
-alias sq="while true; do clear; squeue -u $USER --long ; sleep 5; done"
+alias sq="while true; do clear; SQ ; sleep 5; done"
 alias SQ='squeue -u $USER --format="%.7i %.9P %.20j %.8u %.2t %.10M %.6D %12R %10C %10m %12l %12L %Z"'
 
 alias modeb="cd /opt/apps/testapps/common/modules" 
