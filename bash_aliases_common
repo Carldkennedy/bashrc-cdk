@@ -9,7 +9,8 @@ alias sce="echo -e 'https://github.com/Carldkennedy/bashrc-cdk/edit/main/sc_${ho
 alias scg="cat ~/bashrc-cdk/sc_${hostname} ~/bashrc-cdk/sc_common | grep -i"
 # Watching changes in ps aux output
 alias pswatch="watch -n 0.2 'ps aux | sort > /tmp/ps1 && sleep 0.2 && ps aux | sort > /tmp/ps2 && comm -13 /tmp/ps1 /tmp/ps2'"
-alias pslog="watch -n 0.2 'echo $(date) && comm -13 <(ps aux | sort) <(sleep 0.2 && ps aux | sort)' >> output.log"
+alias pslog="watch -n 0.2 'echo -n $(date) && echo -e "\n$(comm -13 <(ps aux | sort) <(sleep 0.2 && ps aux | sort))"' >> output.log
+"
 
 alias ports='ss -plunt'
 alias nocomment="grep -Ev '''^(#|$)'''" ## Usage: nocomment /etc/squid.conf
