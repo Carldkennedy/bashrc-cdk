@@ -7,6 +7,9 @@ alias alg="cat ~/bashrc-cdk/bash_aliases_"${hostname}" ~/bashrc-cdk/bash_aliases
 alias sc="more ~/bashrc-cdk/sc_${hostname} ~/bashrc-cdk/sc_common"
 alias sce="echo -e 'https://github.com/Carldkennedy/bashrc-cdk/edit/main/sc_${hostname}\nhttps://github.com/Carldkennedy/bashrc-cdk/edit/main/sc_common'"
 alias scg="cat ~/bashrc-cdk/sc_${hostname} ~/bashrc-cdk/sc_common | grep -i"
+# Watching changes in ps aux output
+alias pswatch="watch -n 0.2 'ps aux | sort > /tmp/ps1 && sleep 0.2 && ps aux | sort > /tmp/ps2 && comm -13 /tmp/ps1 /tmp/ps2'"
+alias pslog=""watch -n 0.2 'echo $(date) && comm -13 <(ps aux | sort) <(sleep 0.2 && ps aux | sort)' >> output.log
 
 alias ports='ss -plunt'
 alias nocomment="grep -Ev '''^(#|$)'''" ## Usage: nocomment /etc/squid.conf
