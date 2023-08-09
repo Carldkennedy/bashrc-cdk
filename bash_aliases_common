@@ -10,6 +10,7 @@ alias scg="cat ~/bashrc-cdk/sc_${hostname} ~/bashrc-cdk/sc_common | grep -i"
 # Watching changes in ps aux output
 alias pswatch="watch -n 0.2 'ps aux | sort > /tmp/ps1 && sleep 0.2 && ps aux | sort > /tmp/ps2 && comm -13 /tmp/ps1 /tmp/ps2'"
 alias pslog="while true; do echo -e "\n$(date)"; comm -13 <(ps aux | sort) <(sleep 0.1 && ps aux | sort); sleep 0.1; done >> ps.log"
+alias commands="echo $PATH | tr ':' '\n' | xargs ls | sort -u"
 
 alias ports='ss -plunt'
 alias nocomment="grep -Ev '''^(#|$)'''" ## Usage: nocomment /etc/squid.conf
