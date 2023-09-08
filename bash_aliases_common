@@ -61,4 +61,5 @@ alias back="screen -d -r; clear; git lgs; git status; ls"
 
 # Monitoring
 
-alias nvs='nvidia-smi --query-gpu=timestamp,gpu_bus_id,utilization.gpu,utilization.memory,memory.used,memory.free --format=csv,nounits | column -t -s ',''
+alias nvsg='nvidia-smi --query-gpu=timestamp,gpu_bus_id,utilization.gpu,utilization.memory,memory.used,memory.free --format=csv,nounits | column -t -s ',''
+alias nvsc='nvidia-smi --query-compute-apps=pid,process_name,used_gpu_memory --format=csv,nounits | column -t -s ',''
