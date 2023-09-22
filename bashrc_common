@@ -26,6 +26,10 @@ mkcd() {
 dtfromsec(){
         date -u -d @${1} +"%D-%T"
 }
+
+fetchFromHome(){
+	find ~/ -maxdepth 1 -mmin -$1 -type f -exec mv {} $(pwd) \;
+}
 Log() {
      touch ~/log.log
      echo [`date -u +%Y-%m-%d\ T\ %H:%M:%S\ Z`] $* | cat - ~/log.log > temp && mv temp ~/log.log
