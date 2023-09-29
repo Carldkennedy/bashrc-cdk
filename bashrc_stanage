@@ -21,6 +21,10 @@ jobinfo() {
 
 userinfo() {
     clear
+
+    echo -e "\n####################### Efficiency last week ###################### \n"
+    sacct -u $1 -S $(date +%Y-%m-%d -d "1 weeks ago") -E $(date +%Y-%m-%d) --state=COMPLETED --format=JobID%30 --noheader |  grep -v "\." | while read -r job_id; do seff "$job_id"; done | grep -e "Effi\|ID"
+    
     echo -e "\n##################### Recently finished jobs ###################### \n"
     sacct -u $1 --format=JobID,JobName,Partition,AllocCPUS,State,ExitCode,Start,End,Elapsed
 
@@ -33,8 +37,6 @@ userinfo() {
     echo -e "\n############################# squeue ############################## \n"
     squeue -u $1
 
-    echo -e "\n############################# Efficiency ###################### \n"
-    sacct -u $1 -S $(date +%Y-%m-%d -d "2 weeks ago") -E $(date +%Y-%m-%d) --state=COMPLETED --format=JobID%30 --noheader |  grep -v "\." | while read -r job_id; do seff "$job_id"; done | grep -e "Effi\|ID"
     eval df -h "~$1"
 }
 
