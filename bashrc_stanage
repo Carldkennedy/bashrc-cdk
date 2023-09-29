@@ -107,3 +107,20 @@ lmodiff() {
 	diff cached_modules.txt installed_modules.txt
 	rm cached_modules.txt installed_modules.txt
 }
+
+gpu_user_processes() {
+    local username="$1"
+    if [[ -z "$username" ]]; then
+        echo "Usage: gpu_user_processes <username>"
+        return 1
+    fi
+    
+    local nodes=("gpu01" "gpu02" "gpu03" "gpu04" "gpu05" "gpu06" "gpu07" "gpu08" "gpu09" "gpu10" "gpu11" "gpu12" "gpu13" "gpu14" "gpu15" "gpu16" "gpu17" "gpu18" "gpu21" "gpu22" "gpu23" "gpu24" "gpu25" "gpu26")
+    for node in "${nodes[@]}"; do
+        output=$(ssh "$node" "ps -u $username" 2>/dev/null) || continue
+        if [[ -n "$output" ]]; then
+            echo "Processes on $node:"
+            echo "$output"
+        fi
+    done
+}
