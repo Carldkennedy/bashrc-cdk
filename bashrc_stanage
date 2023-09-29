@@ -35,7 +35,7 @@ userinfo() {
 
     echo -e "\n############################# Efficiency ###################### \n"
     sacct -u $1 -S $(date +%Y-%m-%d -d "2 weeks ago") -E $(date +%Y-%m-%d) --state=COMPLETED --format=JobID%30 --noheader |  grep -v "\." | while read -r job_id; do seff "$job_id"; done | grep -e "Effi\|ID"
-    df -h "~$1"
+    eval df -h "~$1"
 }
 
 modl() {
