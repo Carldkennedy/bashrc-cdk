@@ -3,7 +3,7 @@ export EASYBUILD_ROBOT_PATHS="/opt/apps/testapps/common/easybuild/EasyBuild/4.7.
 
 sacctu() {
             sacct --user="$1" --format=Account,AveCPU,AveRSS,AveVMSize,CPUTime,Elapsed,ExitCode,JobID,JobName,MaxRSS,MaxVMSize,MaxDiskRead,MaxDiskWrite,ReqCPUS,ReqMem,ReqNodes,NCPUS,NNodes;
- }
+}
 
 # Function to get stats of a specific job in a cluster environment
 getClusterJobStats() {
@@ -44,7 +44,7 @@ modl() {
     	else
 	    	module spider "$1" 2>&1 | grep "       " | sed  -e 's/^/module load /' | sed 's/  */ /g'
 	fi
- }
+}
 
 # Searches for available modules and their reverse dependencies
 moduleDependencies() {
