@@ -10,6 +10,7 @@ alias SQ='squeue -u $USER --format="%.7i %.9P %.20j %.8u %.2t %.10M %.6D %12R %1
 alias sh='srun --cpus-per-task=12 --partition=gpu --qos=gpu --mem=82G --reservation=gpu-h100 --gres=gpu:h100:1 --pty /bin/bash'
 alias sa='srun --cpus-per-task=12 --partition=gpu --qos=gpu --mem=82G --gres=gpu:a100:1  --pty bash'
 alias Seff='sacct -u $USER -S $(date +%Y-%m-%d -d "2 weeks ago") -E $(date +%Y-%m-%d) --state=COMPLETED --format=JobID%30 --noheader |  grep -v "\." | while read -r job_id; do seff "$job_id"; done | grep -e "Effi\|ID"'
+alias Seff2='sacct -u $USER -S $(date +%Y-%m-%d -d "2 weeks ago") -E $(date +%Y-%m-%d) --state=COMPLETED --format=JobID%30 --noheader |  grep -v "\." | while read -r job_id; do seff "$job_id"; done'
 alias ms='module spider'
 
 alias modeb="cd /opt/apps/testapps/common/modules" 
