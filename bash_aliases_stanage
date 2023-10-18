@@ -33,9 +33,6 @@ alias modeasy="modbegin; module load EasyBuild"
 alias deadmodsym="find /opt/apps/testapps/el7/modules/ -type l -print0 | xargs -0 -n1 sh -c 'test ! -e "$0" && echo "$0"'"
 
 alias eb='echo NO EB!'
-alias eb-bootstrap='"eb" --configfiles /opt/apps/testapps/common/module-system/easybuild-config-module-system-bootstrap-only.cfg'
-alias eb-live='"eb" --configfiles /opt/apps/testapps/el7/easybuild-configs/live/easybuild-config-native.cfg ' 
-alias eb-staging='"eb" --configfiles /opt/apps/testapps/el7/easybuild-configs/staging/easybuild-config-native.cfg '
 alias hooks="vim /opt/apps/testapps/common/easybuild/hooks/default.py"
 
 
