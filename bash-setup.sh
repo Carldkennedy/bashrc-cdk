@@ -71,7 +71,7 @@ else
   exit 1
 fi
 tmux -f tmux.conf
-export VIMINIT="source ~/bashrc-cdk/vimrc"
+
 # restore current working directory
 popd > /dev/null
 
