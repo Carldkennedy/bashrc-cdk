@@ -71,6 +71,7 @@ else
   exit 1
 fi
 tmux -f tmux.conf
+vim vimrc
 # restore current working directory
 popd > /dev/null
 
