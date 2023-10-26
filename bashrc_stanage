@@ -138,8 +138,10 @@ wait_for_job_completion() {
       sleep 10
       squeue -j "$JOB_ID" > /dev/null
     done
-
-    echo -e "\nJob $JOB_ID has finished." > /dev/tty
+    local COMPLETION_TIME=$(date "+%Y-%m-%d %H:%M:%S")
+    local MESSAGE="Job $JOB_ID has finished at $COMPLETION_TIME"
+    echo -e "\n$MESSAGE:wq
+." > /dev/tty
   ) &
   echo "Job $JOB_ID is being monitored in the background."
 }
