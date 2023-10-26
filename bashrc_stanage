@@ -124,3 +124,21 @@ gpu_user_processes() {
         fi
     done
 }
+
+wait_for_job_completion() {
+  if [ -z "$1" ]; then
+    echo "Usage: wait_for_job_completion <job_id>"
+    return 1
+  fi
+
+  local JOB_ID="$1"
+  squeue -j "$JOB_ID"
+  
+  while [ $? -eq 0 ]; do
+    sleep 10
+    squeue -j "$JOB_ID" > /dev/null
+  done
+
+  echo "Job $JOB_ID has finished."
+}
+
