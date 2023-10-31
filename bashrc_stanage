@@ -7,7 +7,7 @@ sacctu() {
 
 # Function to get stats of a specific job in a cluster environment
 getClusterJobStats() {
-    sstat --jobs="$jobID" --format=AveCPU,AveRSS,AveVMSize,JobID,MaxRSS,MaxVMSize,NTasks;
+    sstat --jobs="$1" --format=AveCPU,AveRSS,AveVMSize,JobID,MaxRSS,MaxVMSize,NTasks;
 }
 
 jobinfo() {
