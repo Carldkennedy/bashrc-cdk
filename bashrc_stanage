@@ -15,6 +15,8 @@ jobinfo() {
     sacct --format="JobID,JobName%50,State,ExitCode,Start,End" --state=FAILED -j $1
     echo -e "\n########################### In queue ############################# \n"
     squeue -j $1
+    echo -e "\n"
+    scontrol show job $1
     echo -e "\n########################## Finished jobs ########################## \n"
     sacct --format="JobID,JobName%50,State,ExitCode,Start,End" --state=COMPLETED -j $1
 }
