@@ -55,7 +55,7 @@ alias gitkeep="find . -type d -empty -not -path "./.git/*" -exec touch {}/.gitke
 alias gitlog="source ~/scr/utils/git_info.sh"
 
 # Tmux and screen
-alias tnew="-cwd tmux new -s $(basename $PWD)"
+alias tnew="tmux new -s $(basename $PWD)"
 alias told="tmux attach -t $(basename $PWD)"
 alias myses="tmux new-session -A -s mysession"
 alias back="screen -d -r; clear; git lgs; git status; ls"
