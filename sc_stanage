@@ -3,6 +3,7 @@ ssh username@stanage.shef.ac.uk
 srun --pty bash -i
 flight desktop verify xfce   (only do this once)
 flight desktop start --geometry 1800x1000 xfce
+ssh -L port:10.10.1.1:port username@stanage.shef.ac.uk
 ## a fix ##
 mv ~/.local/share/flight/desktop ~/.local/share/flight/desktop_bk
 ##########################################################################
