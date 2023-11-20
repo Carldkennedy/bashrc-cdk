@@ -1,3 +1,11 @@
+################################# Flight #################################
+ssh username@stanage.shef.ac.uk
+srun --pty bash -i
+flight desktop verify xfce   (only do this once)
+flight desktop start --geometry 1800x1000 xfce
+## a fix ##
+mv ~/.local/share/flight/desktop ~/.local/share/flight/desktop_bk
+##########################################################################
 /opt/apps/testapps/media/eb-srcs                                               EASYBUILD SRCS tar.gz etc
 /opt/apps/testapps/common/easybuild/easyconfigs/stanage/easyconfigs/           EASYCONFIGS ALREADY INSTALLED
 
