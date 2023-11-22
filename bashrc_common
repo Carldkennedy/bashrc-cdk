@@ -1,4 +1,5 @@
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+export MANPATH=$MANPATH:/home/$USER/.fzf/man
 
 export HISTTIMEFORMAT="%F %T "
  # Have history update from all sessions and be immediately available
