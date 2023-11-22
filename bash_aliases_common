@@ -64,3 +64,10 @@ alias back="screen -d -r; clear; git lgs; git status; ls"
 
 alias nvsg='nvidia-smi --query-gpu=timestamp,gpu_name,gpu_bus_id,utilization.gpu,utilization.memory,memory.used,memory.free --format=csv,nounits | column -t -s ',''
 alias nvsc='nvidia-smi --query-compute-apps=timestamp,gpu_bus_id,pid,process_name,used_gpu_memory --format=csv,nounits | column -t -s ',''
+
+# fzf fuzzy search
+alias fzp='fzf --preview "cat {}"'
+alias fzg='git grep --line-number . | fzf --delimiter : --nth 3.. --bind "enter:become(vim {1} +{2})"'
+alias fzv='fzf --bind "enter:become(vim {})"'
+alias fzh='history | fzf'
+alias fzps'ps aux | fzf --bind "ctrl-r:reload(ps aux)" --header "Press CTRL-R to reload" --header-lines=1 --height=50% --layout=reverse'
