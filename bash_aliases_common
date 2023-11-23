@@ -70,5 +70,6 @@ alias fzp='fzf --preview "cat {}"'
 alias fzg='git grep --line-number . | fzf --delimiter : --nth 3.. --bind "enter:become(vim {1} +{2})"'
 alias fzv='fzf --bind "enter:become(vim {})"'
 alias fzh='history | fzf'
-alias fzps='(ps aux | { read -r line; echo "$line"; sort -nrk 3,3; } | fzf --bind "ctrl-r:reload(ps aux | { read -r line; echo \"\$line\"; sort -nrk 3,3; })" --header-lines=1 --height=50% --layout=reverse)'
+alias fzps='(ps aux | { read -r line; echo "$line"; sort -nrk 3,3; } | fzf --header "Press CTRL-R to reload\n$line" --bind "ctrl-r:reload(ps aux | { read -r line; echo \"\$line\"; sort -nrk 3,3; })" --header-lines=2 --height=50% --layout=reverse)'
+
 
