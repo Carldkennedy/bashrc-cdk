@@ -32,7 +32,7 @@ alias cust="cd /opt/apps/testapps/common/easybuild/easyconfigs/stanage/easyconfi
 alias ebcfgs='echo "Where are the EasyBuild Configs"'
 alias modeasy="modbegin; module load EasyBuild"
 alias deadmodsym="find /opt/apps/testapps/el7/modules/ -type l -print0 | xargs -0 -n1 sh -c 'test ! -e "$0" && echo "$0"'"
-alias ebsj='eb-staging -drl --job --job-cores 32 --job-max-walltime 8 --job-eb-cmd "unset MODULEPATH && ml use /opt/apps/testapps/common/modules/easybuild-only/all && ml use /opt/apps/testapps/el7/modules/staging/all && ml EasyBuild && eb"
+alias ebsj='eb-staging -drl --job --job-cores 32 --job-max-walltime 8 --job-eb-cmd "unset MODULEPATH && ml use /opt/apps/testapps/common/modules/easybuild-only/all && ml use /opt/apps/testapps/el7/modules/staging/all && ml EasyBuild && eb"'
 
 alias eb='echo NO EB!'
 alias hooks="vim /opt/apps/testapps/common/easybuild/hooks/default.py"
