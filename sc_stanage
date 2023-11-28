@@ -6,6 +6,7 @@ flight desktop start --geometry 1800x1000 xfce
 ssh -L port:10.10.1.1:port username@stanage.shef.ac.uk
 ## a fix ##
 mv ~/.local/share/flight/desktop ~/.local/share/flight/desktop_bk
+Use 'flssh $port' function to print ssh command
 ##########################################################################
 /opt/apps/testapps/media/eb-srcs                                               EASYBUILD SRCS tar.gz etc
 /opt/apps/testapps/common/easybuild/easyconfigs/stanage/easyconfigs/           EASYCONFIGS ALREADY INSTALLED
