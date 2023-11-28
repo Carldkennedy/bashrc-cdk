@@ -147,5 +147,8 @@ wait_for_job_completion() {
   ) &
   echo "Job $JOB_ID is being monitored in the background."
 }
-
+# flight port forwarding
+flssh() {
+	echo "ssh -L ${1}:$(hostname -I | awk '{print $1}'):${1} ${USER}@stanage.shef.ac.uk" 
+}
 
