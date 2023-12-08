@@ -70,7 +70,7 @@ else
   echo "Hostname is unknown. Exiting script."
   exit 1
 fi
-tmux -f ~/bashrc/tmux.conf
+tmux source-file ~/bashrc/tmux.conf
 
 # restore current working directory
 popd > /dev/null
