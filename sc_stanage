@@ -9,6 +9,7 @@ mv ~/.local/share/flight/desktop ~/.local/share/flight/desktop_bk
 Use 'flssh $port' function to print ssh command
 ##########################################################################
 find /opt/apps/testapps/el7/modules/ -type f -name "*.lua" -mtime -30 | less   Recently installed apps
+find /opt/apps/testapps/el7/modules/ -type f -name "*.lua" -mtime -30 -exec bash -c 'ls -lrth "$0"' {} \; | grep $USER 
 /opt/apps/testapps/media/eb-srcs                                               EASYBUILD SRCS tar.gz etc
 /opt/apps/testapps/common/easybuild/easyconfigs/stanage/easyconfigs/           EASYCONFIGS ALREADY INSTALLED
 
