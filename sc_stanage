@@ -8,6 +8,8 @@ ssh -L port:10.10.1.1:port username@stanage.shef.ac.uk
 mv ~/.local/share/flight/desktop ~/.local/share/flight/desktop_bk
 Use 'flssh $port' function to print ssh command
 ##########################################################################
+find /opt/apps/testapps/el7/modules/ -type f -name "*.lua" -mtime -30 | less   Recently installed apps
 /opt/apps/testapps/media/eb-srcs                                               EASYBUILD SRCS tar.gz etc
 /opt/apps/testapps/common/easybuild/easyconfigs/stanage/easyconfigs/           EASYCONFIGS ALREADY INSTALLED
+
 
