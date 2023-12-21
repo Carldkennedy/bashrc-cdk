@@ -35,6 +35,7 @@ alias lsa="ls -lraht"
 alias lst="ls -la --time-style=full-isols -la --time-style=full-iso"
 alias cath="cat "$1" | column -t"
 alias catl="cat $(ls -t "$1"* | head -1)"
+alias out='cat "$(ls -t *.out | head -n 1)"'
 
 # some more ls aliases
 alias cls="cd .. ;ls"
