@@ -287,6 +287,19 @@ easyconfig_dependency_tree() {
     _print_dependency_tree "$easyconfig_file"
 }
 
+git_add_commit() {
+    if [ $# -ne 2 ]; then
+        echo "Usage: git_add_commit <file> <commit_message>"
+        return 1
+    fi
+
+    local filename="$1"
+    local commit_message="$2"
+
+    git add "$filename" && git commit -m "$commit_message"
+}
+
+
 
 
 
