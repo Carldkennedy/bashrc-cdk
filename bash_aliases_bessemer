@@ -6,7 +6,7 @@ alias SQ='squeue -u $USER --format="%.7i %.9P %.20j %.8u %.2t %.10M %.6D %12R %1
 alias myses='squeue -j $SLURM_JOB_ID --format="%.18i %.9P %.50j %.8u %.8T %.10M %.6D %.6C %.12R %.12m %.8G %.6t"'
 alias modnoeb="cd /usr/local/modulefiles/live/noeb" 
 alias modeb="cd /usr/local/modulefiles/live/eb/all" 
-alias modulefind="module avail |& grep -i"
+alias modulefind="module -t --redirect avail |& grep -i"
 alias modavail="module avail -t"
 alias modstag="module unuse /usr/local/modulefiles/live/eb/all; module unuse /usr/local/modulefiles/live/noeb; module unuse /usr/local/modulefiles/staging/eb-znver3/all/; module use /usr/local/modulefiles/staging/eb/all; module load EasyBuild/4.6.1-staging"
 alias partition_util="sinfo -o '%.18P %.8a %.8D %.4t %.10C %.6f %.6u %.4m %.20E'"
