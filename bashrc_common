@@ -22,6 +22,10 @@ bkres() {
         cp "$1" ~/results/"${name}"/elements.dat
 }
 
+to_lowercase() {
+    echo "$1" | tr '[:upper:]' '[:lower:]'
+}
+
 mkcd() {
         mkdir -p "$1"; cd "$1";
 }
