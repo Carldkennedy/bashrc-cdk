@@ -11,9 +11,12 @@ export VIMINIT="source ~/bashrc-cdk/vimrc"
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
 ############ Common functions ########################## 
-
 bashupd() {
 	source ~/bashrc-cdk/bash-setup.sh && source ~/.bashrc
+}
+
+cs() {
+     curl cheat.sh/${1}
 }
 
 bkres() {
