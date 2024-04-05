@@ -12,5 +12,6 @@ find /opt/apps/testapps/el7/modules/ -type f -name "*.lua" -mtime -30 | less   R
 find /opt/apps/testapps/el7/modules/ -type f -name "*.lua" -mtime -30 -exec bash -c 'ls -lrth "$0"' {} \; | grep $USER 
 /opt/apps/testapps/media/eb-srcs                                               EASYBUILD SRCS tar.gz etc
 /opt/apps/testapps/common/easybuild/easyconfigs/stanage/easyconfigs/           EASYCONFIGS ALREADY INSTALLED
+module --mt |& grep .lua            SHOW MODULEFILE PATH FOR CURRENTLY LOADED MODULES
 
 
