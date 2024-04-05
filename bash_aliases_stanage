@@ -16,7 +16,8 @@ alias ms='module spider'
 
 alias modeb="cd /opt/apps/testapps/common/modules" 
 alias modavail="module -t --redirect avail 2>&1"
-alias modulefind="module -t --redirect avail |& grep -i"
+alias modulefind="mf"
+alias mf="module -t --redirect avail |& grep -i"
 alias modall="module use /opt/apps/testapps/common/modules/all/"
 alias modstag="module use /opt/apps/testapps/el7/modules/staging/all/"
 alias modbegin="module purge; modall; modstag"
