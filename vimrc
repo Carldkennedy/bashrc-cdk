@@ -8,8 +8,9 @@
 
 :set ruler
 
-" set leader
-let mapleader = "\<C-l>"
+" Remap window management commands
+nnoremap <C-l> <C-w>
+
 
 " Disable cursor keys
 nnoremap <up>    <nop>
