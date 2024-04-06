@@ -30,6 +30,7 @@ alias ls='ls --color=auto' ## Colorize the ls output
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+alias lt='ls -lrath'
 alias l.='ls -d .* --color=auto'
 alias lsa="ls -lraht"
 alias lst="ls -la --time-style=full-isols -la --time-style=full-iso"
