@@ -1,13 +1,15 @@
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-export MANPATH=$MANPATH:/home/$USER/.fzf/man
-
+export MANPATH=$MANPATH:~/.fzf/man
 export HISTTIMEFORMAT="%F %T "
  # Have history update from all sessions and be immediately available
  HISTSIZE=5000
  HISTFILESIZE=10000
  shopt -s histappend
  export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+# Vim bindings
 export VIMINIT="source ~/bashrc-cdk/vimrc"
+# vi-style key bindings on command line 
+set -o vi
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
 ############ Common functions ########################## 
