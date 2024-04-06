@@ -10,6 +10,8 @@ export HISTTIMEFORMAT="%F %T "
 export VIMINIT="source ~/bashrc-cdk/vimrc"
 # vi-style key bindings on command line 
 set -o vi
+# custom key bindings
+source ~/bashrc-cdk/custom_bindings.sh
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
 ############ Common functions ########################## 

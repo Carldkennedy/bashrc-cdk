@@ -20,3 +20,15 @@ inoremap <right> <nop>
 
 " for easier navigating
 inoremap jj <Esc>
+
+" Toggle between 'number' and 'relativenumber' settings
+function! ToggleNumbering()
+    if &number == 1
+        set nonumber norelativenumber
+    else
+        set number relativenumber
+    endif
+endfunction
+
+" Map the toggle function to a different key combination
+nnoremap <F3> :call ToggleNumbering()<CR>
