@@ -15,7 +15,8 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap <C-h> <C-w>h
 
-
+" Caps lock as 2nd Ctrl key
+setxkbmap -option ctrl:nocaps
 
 " Disable cursor keys
 nnoremap <up>    <nop>
