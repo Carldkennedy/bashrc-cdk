@@ -44,11 +44,12 @@ function! InsertLineWithCharacter()
     let char = input('Enter the character to repeat: ')
     if len(char) == 1
         let line = repeat(char, virtcol('$') - 1)
-        execute 'put =' . line
+        put =' . line
     else
         echo 'Please enter a single character.'
     endif
 endfunction
 
 nnoremap <Leader>= :call InsertLineWithCharacter()<CR>
+
 
