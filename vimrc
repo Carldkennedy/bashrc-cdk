@@ -40,6 +40,7 @@ endfunction
 " Map the toggle function to a different key combination
 nnoremap <F3> :call ToggleNumbering()<CR>
 
+" Function for adding underline to title
 function! InsertLineWithCharacter()
     let char = input('Enter the character to repeat: ')
     if len(char) == 1
