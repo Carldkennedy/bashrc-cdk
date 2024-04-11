@@ -43,7 +43,8 @@ nnoremap <F3> :call ToggleNumbering()<CR>
 function! InsertLineWithCharacter()
     let char = input('Enter the character to repeat: ')
     if len(char) == 1
-        execute 'put =repeat("' . char . '", virtcol("$") - 1)'
+        let line = repeat(char, virtcol('$') - 1)
+        execute 'put =' . line
     else
         echo 'Please enter a single character.'
     endif
