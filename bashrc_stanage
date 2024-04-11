@@ -28,7 +28,7 @@ userinfo() {
     sacct -u $1 -S $(date +%Y-%m-%d -d "1 weeks ago") -E $(date +%Y-%m-%d) --state=COMPLETED --format=JobID%30 --noheader | grep -v "\." | while read -r job_id; do seff "$job_id"; done | awk '/Job ID:/ {id=$3} /Cores per node:/ {cores=$4} /CPU Efficiency:/ {cpu=$3} /Memory Efficiency:/ {mem=$3" "$4" "$5" "$6" "$7" "$8; printf "ID %-10s Cores %-5s CPU %-10s Mem %-20s\n", id, cores, cpu, mem}'
 
     echo -e "\n##################### Recently finished jobs ###################### \n"
-    sacct -u $1 --format=JobID,JobName,Partition,AllocCPUS,State,ExitCode,Start,End,Elapsed
+    sacct -u $1 --format=JobID,JobName,Partition,AllocCPUS,State,ExitCode,Submit,Start,End,Elapsed
 
     echo -e "\n############################ CANCELLED ############################ \n"
     sacct -u $1 --state CANCELLED --format=JobID,JobName,Partition,AllocCPUS,State,ExitCode,Start,End,Elapsed
