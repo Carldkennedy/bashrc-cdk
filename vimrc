@@ -39,3 +39,14 @@ endfunction
 
 " Map the toggle function to a different key combination
 nnoremap <F3> :call ToggleNumbering()<CR>
+
+function! InsertLineWithCharacter()
+    let char = input('Enter the character to repeat: ')
+    if len(char) == 1
+        execute 'put =repeat("' . char . '", virtcol("$") - 1)'
+    else
+        echo 'Please enter a single character.'
+    endif
+endfunction
+
+nnoremap <Leader>= :call InsertLineWithCharacter()<CR>
