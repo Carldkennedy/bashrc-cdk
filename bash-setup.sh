@@ -36,6 +36,7 @@ if [ $? -eq 0 ]; then
       # If not, add them to the .bashrc file
       echo -e "\n# Load custom bash aliases for $my_hostname\n. ~/bashrc-cdk/bash_aliases_$my_hostname" >> ~/.bashrc
     fi
+  fi
 else
   echo "Error: Git clone failed, setup or update aborted."
   popd > /dev/null
