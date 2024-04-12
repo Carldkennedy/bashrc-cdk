@@ -1,13 +1,13 @@
 #!/bin/bash
 assign_hostname() {
   if [[ "$HOSTNAME" == *"bessemer"* ]]; then
-    echo "bessemer"
+    hostname="bessemer"
   elif [[ "$HOSTNAME" == *"stanage"* ]]; then
-    echo "stanage"
+    hostname="stanage"
   elif [[ "$HOSTNAME" == *"sharc"* ]]; then
-    echo "sharc"
+    hostname="sharc"
   else
-    echo "unknown"
+    hostname="unknown"
   fi
 }
 # call function and assign hostname to variable
@@ -21,6 +21,7 @@ cd ~/bashrc-cdk && git pull > /dev/null 2>&1 &&
 echo -e "##################################\nCustom bashrc updated from Github.\n##################################" || 
 echo -e "################################\nCustom bashrc git update failed.\n################################"
 if [ $? -eq 0 ]; then
+
   # check if hostname is known
   if [[ "$my_hostname" != "unknown" ]]; then
     ## HOST Specific
