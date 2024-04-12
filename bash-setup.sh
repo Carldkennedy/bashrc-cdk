@@ -35,7 +35,6 @@ if [ $? -eq 0 ]; then
       # If not, add them to the .bashrc file
       echo -e "\n# Load custom bash aliases for $my_hostname\n. ~/bashrc-cdk/bash_aliases_$my_hostname" >> ~/.bashrc
     fi
-<<<<<<< HEAD
   fi
 else
   echo "Error: Git clone failed, setup or update aborted."
@@ -61,31 +60,5 @@ then
   echo -e "# Load custom bashrc setup script\n#if [[ \$- == *i* ]]; then\n#    ~/bashrc-cdk/bash-setup.sh \n#fi" >> ~/.bashrc
 fi
 tmux source ~/bashrc-cdk/tmux.conf
-=======
-
-  fi
-
-  ## Common
-  if ! grep -Fxq ". ~/bashrc-cdk/bashrc_common" ~/.bashrc
-  then
-    # If not, add them to the .bashrc file
-    echo -e "\n# Load custom common bashrc\n. ~/bashrc-cdk/bashrc_common" >> ~/.bashrc
-  fi
-  if ! grep -Fxq ". ~/bashrc-cdk/bash_aliases_common" ~/.bashrc
-  then
-    # If not, add them to the .bashrc file
-    echo -e "\n# Load custom common bash aliases\n. ~/bashrc-cdk/bash_aliases_common" >> ~/.bashrc
-  fi
-  if ! grep -Fq "~/bashrc-cdk/bash-setup.sh" ~/.bashrc
-  then
-    # If not, add them to the .bashrc file
-    echo -e "\n# Before enabling, check if git pull + SSH agent forwarding causes high CPU." >> ~/.bashrc
-    echo -e "# Load custom bashrc setup script\n#if [[ \$- == *i* ]]; then\n#    ~/bashrc-cdk/bash-setup.sh \n#fi" >> ~/.bashrc
-  fi
-  tmux source ~/bashrc-cdk/tmux.conf
-else
-  echo "Error: Git clone failed, setup or update aborted." 
-fi
->>>>>>> parent of 31e1577 (Correct bash-setup)
 # restore current working directory
 popd > /dev/null
