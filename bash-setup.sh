@@ -42,6 +42,7 @@ popd > /dev/null
 exit 
 fi
 
+
 ## Common
 if ! grep -Fxq ". ~/bashrc-cdk/bashrc_common" ~/.bashrc
 then
@@ -60,5 +61,6 @@ then
   echo -e "# Load custom bashrc setup script\n#if [[ \$- == *i* ]]; then\n#    ~/bashrc-cdk/bash-setup.sh \n#fi" >> ~/.bashrc
 fi
 tmux source ~/bashrc-cdk/tmux.conf
+
 # restore current working directory
 popd > /dev/null
