@@ -1,13 +1,13 @@
 #!/bin/bash
 assign_hostname() {
   if [[ "$HOSTNAME" == *"bessemer"* ]]; then
-    return "bessemer"
+    echo "bessemer"
   elif [[ "$HOSTNAME" == *"stanage"* ]]; then
-    return "stanage"
+    echo "stanage"
   elif [[ "$HOSTNAME" == *"sharc"* ]]; then
-    return "sharc"
+    echo "sharc"
   else
-    return "unknown"
+    echo "unknown"
   fi
 }
 # call function and assign hostname to variable
