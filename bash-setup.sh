@@ -20,7 +20,7 @@ pushd . > /dev/null
 cd ~/bashrc-cdk && git pull > /dev/null 2>&1 && 
 echo -e "##################################\nCustom bashrc updated from Github.\n##################################" || 
 echo -e "################################\nCustom bashrc git update failed.\n################################"
-if [ $? -eq 0 ]; then
+if [ $? -eq 1 ]; then
   # check if hostname is known
   if [[ "$my_hostname" != "unknown" ]]; then
     ## HOST Specific
