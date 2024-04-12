@@ -37,9 +37,9 @@ if [ $? -eq 0 ]; then
       echo -e "\n# Load custom bash aliases for $my_hostname\n. ~/bashrc-cdk/bash_aliases_$my_hostname" >> ~/.bashrc
     fi
 else
-echo "Error: Git clone failed, setup or update aborted."
-popd > /dev/null
-exit 
+  echo "Error: Git clone failed, setup or update aborted."
+  popd > /dev/null
+  exit 
 fi
 
 ## Common
