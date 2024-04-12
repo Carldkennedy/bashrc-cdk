@@ -56,7 +56,7 @@ if [ $? -eq 0 ]; then
     echo -e "\n# Before enabling, check if git pull + SSH agent forwarding causes high CPU." >> ~/.bashrc
     echo -e "# Load custom bashrc setup script\n#if [[ \$- == *i* ]]; then\n#    ~/bashrc-cdk/bash-setup.sh \n#fi" >> ~/.bashrc
   fi
-tmux source ~/bashrc-cdk/tmux.conf
+  tmux source ~/bashrc-cdk/tmux.conf
 else
   echo "Error: Git clone failed, setup or update aborted." 
 fi
