@@ -8,6 +8,7 @@ export HISTTIMEFORMAT="%F %T "
  export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 # Vim bindings
 export VIMINIT="source ~/bashrc-cdk/vimrc"
+export EDITOR=vim
 # vi-style key bindings on command line 
 set -o vi
 # custom key bindings
