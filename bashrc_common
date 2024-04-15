@@ -14,7 +14,7 @@ PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; h
 ## Vim
 export VIMINIT="source ~/bashrc-cdk/vimrc"
 export EDITOR=vim
-PATH="$PATH:$HOME/bashrc-cdk/bin/.local/scripts"
+# PATH="$PATH:$HOME/bashrc-cdk/bin/.local/scripts"
 # vi-style key bindings on command line 
 set -o vi
 # custom key bindings
