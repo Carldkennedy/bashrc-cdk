@@ -1,12 +1,17 @@
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 export MANPATH=$MANPATH:~/.fzf/man
+## History
 export HISTTIMEFORMAT="%F %T "
- # Have history update from all sessions and be immediately available
  HISTSIZE=5000
  HISTFILESIZE=10000
- shopt -s histappend
- export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
-# Vim bindings
+# Have history update from all sessions and be immediately available
+# Avoid duplicates
+HISTCONTROL=ignoredups:erasedups
+# When the shell exits, append to the history file instead of overwriting it
+shopt -s histappend
+# After each command, append to the history file and reread it
+PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"# Vim bindings
+## Vim
 export VIMINIT="source ~/bashrc-cdk/vimrc"
 export EDITOR=vim
 # vi-style key bindings on command line 

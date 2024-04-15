@@ -28,7 +28,7 @@ alias modep="moduleDependencies"
 alias modcache="/opt/apps/testapps/common/module-system/current/installation/Lmod/$LMOD_VERSION/lmod/lmod/libexec/Cache.lua"
 
 #Easybuild
-alias easycfgs="cd /opt/apps/testapps/common/easybuild/EasyBuild/4.7.1/easybuild/easyconfigs/"
+alias easycfgs="cd /opt/apps/testapps/common/easybuild/EasyBuild/${EBVERSIONEASYBUILD}/easybuild/easyconfigs/"
 alias cust="cd /opt/apps/testapps/common/easybuild/easyconfigs/stanage/easyconfigs"
 alias ebconfig='less /opt/apps/testapps/el7/easybuild-configs/staging/easybuild-config-native.cfg'
 alias modeasy="modbegin; module load EasyBuild"
