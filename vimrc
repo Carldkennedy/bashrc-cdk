@@ -52,6 +52,7 @@ function! InsertLineWithCharacter()
 endfunction
 
 nnoremap <Leader>= :call InsertLineWithCharacter()<CR>
+nnoremap <Space> :
 
 " Changing colours with mode
 
