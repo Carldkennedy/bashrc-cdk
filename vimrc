@@ -1,3 +1,4 @@
+:colorscheme slate
 :set number
 syntax on
 :augroup numbertoggle
