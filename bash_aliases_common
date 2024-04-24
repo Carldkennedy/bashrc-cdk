@@ -13,6 +13,7 @@ alias pslog="while true; do echo -e "\n$(date)"; comm -13 <(ps aux | sort) <(sle
 alias commands="echo $PATH | tr ':' '\n' | xargs ls | sort -u"
 alias watchdir='watch -n1 "echo $PWD; ls"'
 alias dt='date -u +%Y-%m-%dT%H:%M:%S%Z'
+alias print_path='awk '\''BEGIN{gsub(":", "\n", ENVIRON[ARGV[1]]); print ENVIRON[ARGV[1]]}'\'''
 
 alias ports='ss -plunt'
 alias nocomment="grep -Ev '''^(#|$)'''" ## Usage: nocomment /etc/squid.conf
