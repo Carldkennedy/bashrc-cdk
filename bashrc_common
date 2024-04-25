@@ -316,8 +316,16 @@ git_add_commit() {
     git add "$filename" && git commit -m "$commit_message"
 }
 
-
-
+# git grep with fzf excluding ignored files
+fzf_git_grep() {
+    git grep --line-number . |
+    while IFS=: read -r file line _; do
+        if ! git check-ignore -q "$file"; then
+            echo "$file:$line"
+        fi
+    done |
+    fzf --delimiter : --nth 3.. --bind 'enter:become(vim {1} +{2})'
+}
 
 
 
