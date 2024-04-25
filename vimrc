@@ -93,4 +93,6 @@ Plug 'junegunn/seoul256.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/fzf.vim'
+Plug 'SirVer/ultisnips'
+Plug 'tpope/vim-fugitive'
 call plug#end() 
