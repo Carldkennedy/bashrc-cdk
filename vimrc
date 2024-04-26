@@ -123,4 +123,4 @@ let g:limelight_paragraph_span = 0
 let g:limelight_priority = -1
 
 " GoYo Settings
-let g:goyo_width = 120-20%
+let g:goyo_width = 120
