@@ -345,13 +345,11 @@ vline() {
 }
 
 fzge() {
-    local exclude_opts=()
+    local exclude_dirs=""
     if [[ -f ".exclude_dirs" ]]; then
-        while IFS= read -r line; do
-            exclude_opts+=("--" ":!${line}")
-        done < .exclude_dirs
+        exclude_dirs=$(awk '{print "--exclude-dir=" $0}' .exclude_dirs)
     fi
-    git grep --line-number . "${exclude_opts[@]}" | fzf --delimiter : --nth 3.. --bind "enter:become(vim {1} +{2})"
+    git grep --line-number . | grep -vFf <(echo "$exclude_dirs") | fzf --delimiter : --nth 3.. --bind "enter:become(vim {1} +{2})"
 }
 
 
