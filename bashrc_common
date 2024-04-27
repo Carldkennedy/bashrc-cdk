@@ -344,5 +344,15 @@ vline() {
     vim "+$line" $file
 }
 
+fzge() {
+    local exclude_dirs=""
+    if [[ -f ".exclude_dirs" ]]; then
+        while IFS= read -r line; do
+            exclude_dirs+=" --exclude-dir=${line}"
+        done < .exclude_dirs
+    fi
+    git grep --line-number . $exclude_dirs | fzf --delimiter : --nth 3.. --bind "enter:become(vim {1} +{2})"
+}
+
 
 
