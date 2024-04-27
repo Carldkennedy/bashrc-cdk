@@ -337,4 +337,12 @@ grepr() {
     grep -r $exclude_dirs "$@"
 }
 
+vline() {
+    local file line
+    file=$(echo $1 | cut -d ':' -f 1)
+    line=$(echo $1 | cut -d ':' -f 2)
+    vim "+$line" $file
+}
+
+
 
