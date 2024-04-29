@@ -1,13 +1,13 @@
 #!/bin/bash
 assign_hostname() {
   if [[ "$HOSTNAME" == *"bessemer"* ]]; then
-    hostname="bessemer"
+    echo "bessemer"
   elif [[ "$HOSTNAME" == *"stanage"* ]]; then
-    hostname="stanage"
+    echo "stanage"
   elif [[ "$HOSTNAME" == *"sharc"* ]]; then
-    hostname="sharc"
+    echo "sharc"
   else
-    hostname="unknown"
+    echo "unknown"
   fi
 }
 # call function and assign hostname to variable
@@ -17,12 +17,11 @@ echo "Hostname is $my_hostname"
 # save current working directory
 pushd . > /dev/null
 # Clone the repository to the user's home directory first.
-cd ~/bashrc-cdk && git pull > /dev/null 2>&1 && 
-echo -e "##################################\nCustom bashrc updated from Github.\n##################################" || 
-echo -e "################################\nCustom bashrc git update failed.\n################################"
-if [ $? -eq 0 ]; then
-
-  # check if hostname is known
+pushd . > /dev/null
+# Attempt to update the repository, and handle the outcome immediately
+cd ~/bashrc-cdk && if git pull > /dev/null 2>&1; then
+  echo -e "##################################\nCustom bashrc updated from Github.\n##################################"
+    # check if hostname is known
   if [[ "$my_hostname" != "unknown" ]]; then
     ## HOST Specific
     # Check if the lines are already in the .bashrc file
@@ -36,9 +35,9 @@ if [ $? -eq 0 ]; then
       # If not, add them to the .bashrc file
       echo -e "\n# Load custom bash aliases for $my_hostname\n. ~/bashrc-cdk/bash_aliases_$my_hostname" >> ~/.bashrc
     fi
-
+  
   fi
-
+  
   ## Common
   if ! grep -Fxq ". ~/bashrc-cdk/bashrc_common" ~/.bashrc
   then
@@ -58,8 +57,9 @@ if [ $? -eq 0 ]; then
   fi
   tmux source ~/bashrc-cdk/tmux.conf
 else
-  echo "Error: Git clone failed, setup or update aborted." 
+  echo -e "################################\nCustom bashrc git update failed.\n################################"
 fi
+
 # restore current working directory
 popd > /dev/null
 
