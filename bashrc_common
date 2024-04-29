@@ -13,7 +13,7 @@ shopt -s histappend
 PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
 export VIMINIT="source ~/bashrc-cdk/vimrc"
 export EDITOR=vim
-export GPG_TTY=$(tty
+export GPG_TTY=$(tty)
 PATH="$PATH:$HOME/bashrc-cdk/bin/.local/scripts"
 # vi-style key bindings on command line 
 set -o vi
@@ -77,7 +77,7 @@ extract () {
              *.7z)        7z x $1    ;;
              *)           echo "'$1' cannot be extracted via extract" ;;
          esac
-     else
+     else:
          echo "'$1' is not a valid file"
      fi
 }
