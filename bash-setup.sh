@@ -1,10 +1,10 @@
 #!/bin/bash
 assign_hostname() {
-  if [[ "$HOSTNAME" == *"bessemer"* ]]; then
+  if [[ "$HOSTNAME" == "*bessemer*" ]]; then
     echo "bessemer"
   elif [[ "$HOSTNAME" == "*stanage*" ]]; then
     echo "stanage"
-  elif [[ "$HOSTNAME" == *"sharc"* ]]; then
+  elif [[ "$HOSTNAME" == "*sharc*" ]]; then
     echo "sharc"
   else
     echo "unknown"
