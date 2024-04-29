@@ -2,7 +2,7 @@
 assign_hostname() {
   if [[ "$HOSTNAME" == *"bessemer"* ]]; then
     echo "bessemer"
-  elif [[ "$HOSTNAME" == *"stanage"* ]]; then
+  elif [[ "$HOSTNAME" == "*stanage*" ]]; then
     echo "stanage"
   elif [[ "$HOSTNAME" == *"sharc"* ]]; then
     echo "sharc"
