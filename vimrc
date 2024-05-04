@@ -1,6 +1,7 @@
 " :colorscheme desert
 :set background=dark
 :set number
+:set wildmenu
 syntax on
 :augroup numbertoggle
 :  autocmd!
