@@ -2,5 +2,5 @@
 
 # Custom key bindings
 bind -m vi-insert '^A':beginning-of-line
-bind -m vi-insert '^':unbind
+bind -m vi-insert '^@':unbind
 
