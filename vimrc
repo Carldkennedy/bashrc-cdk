@@ -1,4 +1,4 @@
-:colorscheme slate
+:colorscheme desert
 :set number
 syntax on
 :augroup numbertoggle
