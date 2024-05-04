@@ -1,4 +1,4 @@
-:colorscheme desert
+:colorscheme gruvbox
 :set number
 syntax on
 :augroup numbertoggle
