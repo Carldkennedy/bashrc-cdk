@@ -95,6 +95,7 @@ Plug 'junegunn/limelight.vim'
 Plug 'junegunn/fzf.vim'
 " Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-fugitive'
+Plug 'morhetz/gruvbox'
 call plug#end() 
 
 " Limelight settings
