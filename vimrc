@@ -1,4 +1,5 @@
 " :colorscheme desert
+:set background=dark
 :set number
 syntax on
 :augroup numbertoggle
