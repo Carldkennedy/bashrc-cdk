@@ -37,6 +37,7 @@ if git pull > /dev/null 2>&1; then
 else
   echo -e "################################\nCustom bashrc git update failed.\n################################"
 fi
-
+# Backup history
+source ~/bashrc-cdk/backup_new_history.sh
 # Restore the original working directory
 popd > /dev/null
