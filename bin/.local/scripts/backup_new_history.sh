@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Directory to store the backups
-BACKUP_DIR="$HOME/bash_history_backups"
+BACKUP_DIR="$HOME/.bash_history_backups"
 # File to store the last backed-up history line number
 LAST_LINE_FILE="$BACKUP_DIR/last_line.txt"
 
