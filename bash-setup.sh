@@ -38,6 +38,6 @@ else
   echo -e "################################\nCustom bashrc git update failed.\n################################"
 fi
 # Backup history
-source ~/bashrc-cdk/backup_new_history.sh
+source ~/bashrc-cdk/bin/.local/scripts/backup_new_history.sh
 # Restore the original working directory
 popd > /dev/null
