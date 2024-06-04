@@ -43,6 +43,7 @@ alias out='cat "$(ls -t *.out | head -n 1)"'
 alias cls="cd .. ;ls"
 alias ..='cd ..'; alias .2='cd ../../'; alias .3='cd ../../../'; alias .4='cd ../../../../' ; alias .5='cd ../../../../..'
 alias pd="pushd -0" #jump between last two directories
+alias dd="pushd $HOME"
 # size and counts
 alias countfiles="du -a | cut -d/ -f2 | sort | uniq -c | sort -n" #r"
 alias sz0="du -hcs"; alias sz1="du -hcs */"; alias sz2="du -hcs */*"
