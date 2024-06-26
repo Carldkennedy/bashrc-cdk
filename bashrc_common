@@ -355,7 +355,14 @@ fzge() {
 }
 
 bk() {
-    cp $1 $1.bk
+    if [ -f "$1.bk" ]; then
+        read -p "Backup file $1.bk already exists. Do you want to overwrite it? (y/n): " confirm
+        if [[ "$confirm" != [yY] ]]; then
+            echo "Backup not overwritten."
+            return
+        fi
+    fi
+    cp "$1" "$1.bk"
     echo "Backed up file $1"
 }
 
