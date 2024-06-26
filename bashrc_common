@@ -356,6 +356,7 @@ fzge() {
 
 bk() {
     cp $1 $1.bk
+    echo "Backed up file $1"
 }
 
 
