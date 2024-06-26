@@ -356,6 +356,7 @@ fzge() {
 
 bk() {
     if [ -f "$1.bk" ]; then
+        diff $1 ${1}.bk
         read -p "Backup file $1.bk already exists. Do you want to overwrite it? (y/n): " confirm
         if [[ "$confirm" != [yY] ]]; then
             echo "Backup not overwritten."
