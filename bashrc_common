@@ -354,6 +354,8 @@ fzge() {
     git grep --line-number . | grep -vFf <(echo "$exclude_dirs") | fzf --delimiter : --nth 3.. --bind "enter:become(vim {1} +{2})"
 }
 
-
+bk() {
+    cp $1 $1.bk
+}
 
 
