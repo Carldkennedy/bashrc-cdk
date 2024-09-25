@@ -128,3 +128,7 @@ let g:limelight_priority = -1
 
 " GoYo Settings
 let g:goyo_width = 120
+
+" Filetype detection
+au BufRead,BufNewFile *.eb set filetype=python
+
