@@ -1,0 +1,40 @@
+# Jade 2.5 aliases
+alias Sstat='sstat --format=JobID,MaxRSS,MaxVMSize,AveCPU,AveRSS,AveVMSize --jobs='
+alias Sacct='sacct --format=JobID,JobName,Submit,Start,End,WorkDir%50 --job='
+alias cav='sinfo -o "%.30n %.20f %.20G %.20T %.20O %.20P %.10e" | less' # show cluster partition status
+alias partition_util='sinfo -o "%.18P %.8a %.8D %.4t %.10C %.6f %.6u %.4m %.20E"'
+alias myses='squeue -j $SLURM_JOB_ID --format="%.18i %.9P %.50j %.8u %.8T %.10M %.6D %.6C %.12R %.12m %.8G %.6t"'
+alias quota='quota -s'
+alias gpu_state='sinfo -p gpu -N -O "NodeList,Available,Gres,GresUsed,CPUsState"'
+alias sq="while true; do clear; SQ ; sleep 5; done"
+alias SQ='squeue -u $USER --format="%.7i %.9P %.20j %.8u %.2t %.10M %.6D %12R %10C %10m %12l %12L %Z"'
+alias sh='srun --cpus-per-task=12 --partition=gpu --qos=gpu --mem=82G --reservation=gpu-h100 --gres=gpu:h100:1 --pty /bin/bash'
+alias sa='srun --cpus-per-task=12 --partition=gpu --qos=gpu --mem=82G --gres=gpu:a100:1  --pty bash'
+alias Seff='sacct -u $USER -S $(date +%Y-%m-%d -d "2 weeks ago") -E $(date +%Y-%m-%d) --state=COMPLETED --format=JobID%30 --noheader |  grep -v "\." | while read -r job_id; do seff "$job_id"; done | grep -e "Effi\|ID"'
+alias Seff2='sacct -u $USER -S $(date +%Y-%m-%d -d "2 weeks ago") -E $(date +%Y-%m-%d) --state=COMPLETED --format=JobID%30 --noheader |  grep -v "\." | while read -r job_id; do seff "$job_id"; done'
+alias ms='module spider'
+
+alias modeb="cd /opt/apps/testapps/common/modules" 
+alias modavail="module -t --redirect avail 2>&1"
+alias mf="modulefind"
+alias modulefind="module -t --redirect avail |& grep -i"
+alias modall="module use /opt/apps/testapps/common/modules/all/"
+alias modstag="module use /opt/apps/testapps/el7/modules/staging/all/"
+alias modbegin="module purge; modall; modstag"
+alias mods="module spider"
+alias modt="module --mt MODULE_TABLE"
+alias modp="module purge"
+alias modep="moduleDependencies"
+alias modcache="/opt/apps/testapps/common/module-system/current/installation/Lmod/$LMOD_VERSION/lmod/lmod/libexec/Cache.lua"
+alias modrocky='MODULEPATH="" && module use /opt/apps/tuos/{common,el9}/modules/live/all'
+
+#Easybuild
+alias easycfgs="cd /opt/apps/testapps/common/easybuild/EasyBuild/${EBVERSIONEASYBUILD}/easybuild/easyconfigs/"
+alias cust="cd /opt/apps/testapps/common/easybuild/easyconfigs/stanage/easyconfigs"
+alias ebconfig='less /opt/apps/testapps/el7/easybuild-configs/staging/easybuild-config-native.cfg'
+alias modeasy="modbegin; module load EasyBuild"
+alias deadmodsym="find /opt/apps/testapps/el7/modules/ -type l -print0 | xargs -0 -n1 sh -c 'test ! -e "$0" && echo "$0"'"
+alias ebsj='eb-staging -drl --job --job-cores 32 --job-max-walltime 8 --job-eb-cmd "unset MODULEPATH && ml use /opt/apps/testapps/common/modules/easybuild-only/all && ml use /opt/apps/testapps/el7/modules/staging/all && ml EasyBuild && eb"'
+
+alias eb='echo NO EB!'
+
