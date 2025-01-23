@@ -1,0 +1,154 @@
+sacctu() {
+            sacct --user="$1" --format=Account,AveCPU,AveRSS,AveVMSize,CPUTime,Elapsed,ExitCode,JobID,JobName,MaxRSS,MaxVMSize,MaxDiskRead,MaxDiskWrite,ReqCPUS,ReqMem,ReqNodes,NCPUS,NNodes;
+}
+
+# Function to get stats of a specific job in a cluster environment
+getClusterJobStats() {
+    sstat --jobs="$1" --format=AveCPU,AveRSS,AveVMSize,JobID,MaxRSS,MaxVMSize,NTasks;
+}
+
+jobinfo() {
+    echo -e "\n###################### Failed jobs scripts ####################### \n"
+    sacct --format="JobID,JobName%50,State,ExitCode,Start,End" --state=FAILED -j $1
+    echo -e "\n########################### In queue ############################# \n"
+    squeue -j $1
+    echo -e "\n"
+    scontrol show job $1
+    echo -e "\n########################## Finished jobs ########################## \n"
+    sacct --format="JobID,JobName%50,State,ExitCode,Start,End" --state=COMPLETED -j $1
+}
+
+userinfo() {
+    clear
+
+    echo -e "\n####################### Efficiency last week ###################### \n"
+    sacct -u $1 -S $(date +%Y-%m-%d -d "1 weeks ago") -E $(date +%Y-%m-%d) --state=COMPLETED --format=JobID%30 --noheader | grep -v "\." | while read -r job_id; do seff "$job_id"; done | awk '/Job ID:/ {id=$3} /Cores per node:/ {cores=$4} /CPU Efficiency:/ {cpu=$3} /Memory Efficiency:/ {mem=$3" "$4" "$5" "$6" "$7" "$8; printf "ID %-10s Cores %-5s CPU %-10s Mem %-20s\n", id, cores, cpu, mem}'
+
+    echo -e "\n##################### Recently finished jobs ###################### \n"
+    sacct -u $1 --format=JobID,JobName,Partition,AllocCPUS,State,ExitCode,Submit,Start,End,Elapsed
+
+    echo -e "\n############################ CANCELLED ############################ \n"
+    sacct -u $1 --state CANCELLED --format=JobID,JobName,Partition,AllocCPUS,State,ExitCode,Start,End,Elapsed
+
+    echo -e "\n########################### Processes ############################# \n" 
+    ps aux | grep $1
+
+    echo -e "\n############################# squeue ############################## \n"
+    squeue -u $1
+
+    eval df -h "~$1"
+}
+
+modl() {
+	if [[ $# -eq 0 ]]; then
+        	echo "Usage: modl <module_name>"
+    	else
+	    	module spider "$1" 2>&1 | grep "       " | sed  -e 's/^/module load /' | sed 's/  */ /g'
+	fi
+}
+
+# Searches for available modules and their reverse dependencies
+moduleDependencies() {
+    # Get a list of available modules with the provided name
+    modules=($(module -t --redirect avail 2>&1 $1))
+
+    # Get the directory where the modules are stored
+    modulesDir="${modules[0]}"
+    searchDir="${modulesDir%/*}"
+
+    # Loop through the list of available modules and search for their dependencies
+    for module in "${modules[@]}"; do
+        # Print the module name
+        echo "$module"
+        # Search for the dependencies of the current module
+        moduleDependenciesRecursive "$module" "$searchDir"
+    done
+}
+
+# Searches for the reverse dependencies of a given module
+moduleDependenciesRecursive() {
+    # Search for files in the provided directory that contain the string which loads a module
+    deps=($(grep -rl "^    load(\"$1" "${2}/" | awk -F"/" '{printf("%s/%s\n", $(NF-1), $NF)}' | sed 's/\.lua$//' | sed 's|^/||'))
+
+    # Determine the color to use for the output
+    if [[ -n "$3" ]]; then
+        color=$((31 + $3 % 7))
+    else
+        color=31
+    fi
+
+    # Loop through the list of dependencies and search for their dependencies recursively
+    for dep in "${deps[@]}"; do
+        # Skip files with ".bak" in their name
+        if [[ "$dep" == *.bak* ]]; then
+            continue
+        fi
+        # Separate the directory and file name from the path
+        dir=$(dirname "$dep")
+        file=$(basename "$dep")
+        # Print the dependency with the determined color
+        echo -e " \e[${color}m$dir/$file\e[0m"
+        # Search for the dependencies of the current dependency
+        moduleDependenciesRecursive "$dir/$file" "$2" $((color + 1)) 
+    done
+} 
+
+
+lmodiff() {
+	module -t --redirect avail 2>&1 > cached_modules.txt
+	IFS=":" read -ra module_paths <<< "$MODULEPATH"
+	rm -f installed_modules.txt
+	for path in "${module_paths[@]}"; do
+		find "$path" -type f -name "*.lua" -printf "%P\n" | sed "s/\.lua$//" | sed "s/\//\//g" >> installed_modules.txt
+	done
+	sort cached_modules.txt -o cached_modules.txt
+	sort installed_modules.txt -o installed_modules.txt
+	diff cached_modules.txt installed_modules.txt
+	rm cached_modules.txt installed_modules.txt
+}
+
+gpu_user_processes() {
+    local username="$1"
+    if [[ -z "$username" ]]; then
+        echo "Usage: gpu_user_processes <username>"
+        return 1
+    fi
+    
+    local nodes=("gpu"{01..26})
+    for node in "${nodes[@]}"; do
+        output=$(ssh "$node" "ps -u $username" 2>/dev/null) || continue
+        if [[ -n "$output" ]]; then
+            echo "Processes on $node:"
+            echo "$output"
+        fi
+    done
+}
+
+wait_for_job_completion() {
+  if [ -z "$1" ]; then
+    echo "Usage: wait_for_job_completion <job_id>"
+    return 1
+  fi
+
+  local JOB_ID="$1"
+  (
+    squeue -j "$JOB_ID"
+    while [ $? -eq 0 ]; do
+      sleep 10
+      squeue -j "$JOB_ID" > /dev/null
+    done
+    local COMPLETION_TIME=$(date "+%Y-%m-%d %H:%M:%S")
+    local MESSAGE="Job $JOB_ID has finished at $COMPLETION_TIME"
+    echo -e "\n$MESSAGE:wq
+." > /dev/tty
+  ) &
+  echo "Job $JOB_ID is being monitored in the background."
+}
+# flight port forwarding
+flssh() {
+	echo "ssh -L ${1}:$(hostname -I | awk '{print $1}'):${1} ${USER}@stanage.shef.ac.uk" 
+}
+
+sef() {
+	seff $1 | tee ${1}.seff
+}
