@@ -10,6 +10,7 @@ syntax on
 :augroup END
 
 :set ruler
+let mapleader = ","
 
 " Remap window management commands
 " nnoremap <C-l> <C-w>
