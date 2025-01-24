@@ -58,16 +58,27 @@ endfunction
 " Map the function to F2
 nnoremap <F2> :call TogglePaste()<CR>
 
-" Function for adding underline to title
 function! InsertLineWithCharacter()
-    let char = input('Enter the character to repeat: ')
-    if len(char) == 1
-        let line = repeat(char, virtcol('$') - 1)
-        execute 'put =' . string(line)
+    let input_value = input('Enter a number (1: =, 2: -, 3: ~, 4: ^, 5: ") or a custom character: ')
+    if input_value =~ '^[1-5]$'
+        " Map number to predefined characters
+        let char = matchstr('=-~^"', '\%' . input_value . 'c')
+    elseif len(input_value) == 1
+        " Use the custom character if it is a single character
+        let char = input_value
     else
-        echo 'Please enter a single character.'
+        " Handle invalid input
+        echo 'Invalid input. Please enter a number (1-5) or a single character.'
+        return
     endif
+    " Generate the underline and insert it
+    let line = repeat(char, virtcol('$') - 1)
+    execute 'put =' . string(line)
 endfunction
+
+" Map the function to Leader +
+nnoremap <Leader>= :call InsertLineWithCharacter()<CR>
+
 
 nnoremap <Leader>= :call InsertLineWithCharacter()<CR>
 nnoremap <Space> :
