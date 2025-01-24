@@ -43,6 +43,20 @@ endfunction
 " Map the toggle function to a different key combination
 nnoremap <F3> :call ToggleNumbering()<CR>
 
+" Function to toggle 'paste' mode
+function! TogglePaste()
+    if &paste == 1
+        set nopaste
+        echo "Paste mode OFF"
+    else
+        set paste
+        echo "Paste mode ON"
+    endif
+endfunction
+
+" Map the function to F2
+nnoremap <F2> :call TogglePaste()<CR>
+
 " Function for adding underline to title
 function! InsertLineWithCharacter()
     let char = input('Enter the character to repeat: ')
