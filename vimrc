@@ -59,28 +59,19 @@ endfunction
 nnoremap <F2> :call TogglePaste()<CR>
 
 function! InsertLineWithCharacter()
-    let input_value = input('Enter a number (1: =, 2: -, 3: ~, 4: ^, 5: ") or a custom character: ')
-    if input_value =~ '^[1-5]$'
-        " Map number to predefined characters
-        let char = matchstr('=-~^"', '\%' . input_value . 'c')
-    elseif len(input_value) == 1
-        " Use the custom character if it is a single character
-        let char = input_value
+    let choice = input('Enter a number (1: =, 2: -, 3: ~, 4: ^, 5: "): ')
+    if choice =~ '^[1-5]$'
+        let char = matchstr('=-~^"', '\%' . choice . 'c')
+        let line = repeat(char, virtcol('$') - 1)
+        execute 'put =' . string(line)
     else
-        " Handle invalid input
-        echo 'Invalid input. Please enter a number (1-5) or a single character.'
-        return
+        echo 'Invalid input. Please enter a number between 1 and 5.'
     endif
-    " Generate the underline and insert it
-    let line = repeat(char, virtcol('$') - 1)
-    execute 'put =' . string(line)
 endfunction
 
 " Map the function to Leader +
 nnoremap <Leader>= :call InsertLineWithCharacter()<CR>
 
-
-nnoremap <Leader>= :call InsertLineWithCharacter()<CR>
 nnoremap <Space> :
 
 " Changing colours with mode
