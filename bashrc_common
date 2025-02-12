@@ -364,6 +364,13 @@ fzv() {
   fzf --bind "enter:execute(vim {})"
 }
 
+fzps() {
+  ps aux | { read -r line; echo "$line"; sort -nrk 3,3; } | \
+    fzf --header "Press CTRL-R to reload $line" \
+        --bind "ctrl-r:reload(ps aux | { read -r line; echo \"\$line\"; sort -nrk 3,3; })" \
+        --header-lines=1 --height=50% --layout=reverse
+}
+
 bk() {
     if [ -f "$1.bk" ]; then
         echo "diff $1 ${1}.bk" 
