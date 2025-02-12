@@ -65,7 +65,7 @@ alias diff="diff --color=always
 alias tnew="tmux new -s $(basename $PWD)"
 alias told="tmux attach -t $(basename $PWD)"
 alias myses="tmux new-session -A -s mysession"
-alias update-ssh-sock='export SSH_AUTH_SOCK=$(ls -t /tmp/ssh-*/agent.* | head -n 1)'
+alias update-ssh-sock='export SSH_AUTH_SOCK=$(ls -t /tmp/ssh-*/agent.* | head -n 1)' # Needed in old tmux session for agent forwarding
 
 # Monitoring
 
