@@ -54,6 +54,7 @@ alias sza="du -had 1"; # include hidden
 alias gits="git status"
 alias gitb="git branch"
 alias gita="git add -A; git status"
+alias gitu="git add -u && git commit -m"
 alias gitc="git commit -m"
 alias logadog="git log --all --decorate --oneline --graph"
 alias gitkeep="find . -type d -empty -not -path "./.git/*" -exec touch {}/.gitkeep \;" # To add a .gitkeep file to all empty directories in current directory and all subdirectories
