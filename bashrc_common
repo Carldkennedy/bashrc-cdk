@@ -360,6 +360,10 @@ fzge() {
     git grep --line-number . | grep -vFf <(echo "$exclude_dirs") | fzf --delimiter : --nth 3.. --bind "enter:become(vim {1} +{2})"
 }
 
+fzv() {
+  fzf --bind "enter:execute(vim {})"
+}
+
 bk() {
     if [ -f "$1.bk" ]; then
         echo "diff $1 ${1}.bk" 
