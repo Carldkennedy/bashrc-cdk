@@ -74,9 +74,6 @@ alias nvsc='nvidia-smi --query-compute-apps=timestamp,gpu_bus_id,pid,process_nam
 
 # fzf fuzzy search
 alias fzp='fzf --preview "cat {}"'
-fzg() {
-    git grep --line-number . | fzf --delimiter : --nth 3.. --bind "enter:become(vim {1} +{2})"
-}
 alias fzv='fzf --bind "enter:become(vim {})"'
 alias fzh='history | fzf'
 alias fzps='(ps aux | { read -r line; echo "$line"; sort -nrk 3,3; } | fzf --header "Press CTRL-R to reload$line" --bind "ctrl-r:reload(ps aux | { read -r line; echo \"\$line\"; sort -nrk 3,3; })" --header-lines=1 --height=50% --layout=reverse)'
