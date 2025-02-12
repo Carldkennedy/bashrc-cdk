@@ -61,11 +61,10 @@ alias gitkeep="find . -type d -empty -not -path "./.git/*" -exec touch {}/.gitke
 alias gitlog="source ~/scr/utils/git_info.sh"
 alias diff="diff --color=always
 
-# Tmux and screen
+# Tmux
 alias tnew="tmux new -s $(basename $PWD)"
 alias told="tmux attach -t $(basename $PWD)"
 alias myses="tmux new-session -A -s mysession"
-alias back="screen -d -r; clear; git lgs; git status; ls"
 alias update-ssh-sock='export SSH_AUTH_SOCK=$(ls -t /tmp/ssh-*/agent.* | head -n 1)'
 
 # Monitoring
