@@ -370,4 +370,9 @@ bk() {
     echo "Backed up file $1"
 }
 
+if tmux -V | grep -qE "^[2-9]\."; then
+  if [ ! -d ~/.tmux/plugins/tpm ]; then
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+  fi
+fi
 
