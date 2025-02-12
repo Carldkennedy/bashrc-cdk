@@ -59,7 +59,7 @@ alias gitc="git commit -m"
 alias logadog="git log --all --decorate --oneline --graph"
 alias gitkeep="find . -type d -empty -not -path "./.git/*" -exec touch {}/.gitkeep \;" # To add a .gitkeep file to all empty directories in current directory and all subdirectories
 alias gitlog="source ~/scr/utils/git_info.sh"
-alias diff="diff --color=always
+alias diff="diff --color=always"
 
 # Tmux
 alias tnew="tmux new -s $(basename $PWD)"
