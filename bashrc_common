@@ -348,6 +348,10 @@ vline() {
     vim "+$line" $file
 }
 
+fzg() {
+    git grep --line-number . | fzf --delimiter : --nth 3.. --bind "enter:become(vim {1} +{2})"
+}
+
 fzge() {
     local exclude_dirs=""
     if [[ -f ".exclude_dirs" ]]; then
