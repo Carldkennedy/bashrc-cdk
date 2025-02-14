@@ -1,4 +1,4 @@
 df -h ~cs1cdk                            # quota of a users home directory  
 find ./* -size +100M | cat >> .gitignore # git ignore large files
-# Number of cron jobs in queue:wq
+# Number of cron jobs in queue
 squeue --noheader | grep BeginTime | awk '{print $1}' | xargs -I {} scontrol show job {} | grep -i 'cron' | wc -l
