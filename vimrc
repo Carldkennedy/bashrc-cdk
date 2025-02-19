@@ -1,4 +1,4 @@
-" :colorscheme desert
+:colorscheme desert
 :set background=dark
 :set number
 :set wildmenu
