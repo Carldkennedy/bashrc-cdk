@@ -113,7 +113,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-rhubarb'
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-fugitive'
 Plug 'morhetz/gruvbox'
 call plug#end() 
