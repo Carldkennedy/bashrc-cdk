@@ -59,26 +59,35 @@ endfunction
 nnoremap <F2> :call TogglePaste()<CR>
 
 " Toggle textwidth dynamically based on file type.
+" - Sets appropriate textwidth for reStructuredText (rst), Markdown, Python, and Shell scripts.
+" - Disables textwidth when toggling off.
+" - Adjusts formatoptions to enable/disable auto-wrapping while typing.
+" - Displays a status message after toggling.
+
 function! ToggleTextWidth()
     if &textwidth == 0
-        if &filetype ==# 'rst' || &filetype ==# 'markdown'
+        if &filetype ==# 'rst'  " reStructuredText
             let &textwidth = 79
-        elseif &filetype ==# 'python'
-            let &textwidth = 79  " PEP 8
-        elseif &filetype ==# 'sh' || &filetype ==# 'bash'
+        elseif &filetype ==# 'markdown'  " Markdown
+            let &textwidth = 79
+        elseif &filetype ==# 'python'  " Python (PEP 8)
+            let &textwidth = 79
+        elseif &filetype ==# 'sh'  " Shell scripts (includes Bash)
             let &textwidth = 80
         else
             let &textwidth = 80  " Default for other file types
         endif
-        set formatoptions+=t  " Enable text wrapping while typing
+        set formatoptions+=t  " Enable automatic text wrapping while typing
     else
-        let &textwidth = 0  " Disable wrapping
-        set formatoptions-=t  " Prevent auto-wrapping while typing
+        let &textwidth = 0  " Disable text wrapping
+        set formatoptions-=t  " Prevent automatic wrapping while typing
     endif
     echo "Textwidth: " . (&textwidth ? &textwidth : "OFF") . " | formatoptions: " . &formatoptions
 endfunction
 
+" Map F5 to toggle textwidth and formatoptions.
 nnoremap <F5> :call ToggleTextWidth()<CR>
+
 
 
 " Function for adding underline to title
