@@ -58,6 +58,29 @@ endfunction
 " Map the function to F2
 nnoremap <F2> :call TogglePaste()<CR>
 
+" Toggle textwidth dynamically based on file type.
+function! ToggleTextWidth()
+    if &textwidth == 0
+        if &filetype ==# 'rst' || &filetype ==# 'markdown'
+            let &textwidth = 79
+        elseif &filetype ==# 'python'
+            let &textwidth = 79  " PEP 8
+        elseif &filetype ==# 'sh' || &filetype ==# 'bash'
+            let &textwidth = 80
+        else
+            let &textwidth = 80  " Default for other file types
+        endif
+        set formatoptions+=t  " Enable text wrapping while typing
+    else
+        let &textwidth = 0  " Disable wrapping
+        set formatoptions-=t  " Prevent auto-wrapping while typing
+    endif
+    echo "Textwidth: " . (&textwidth ? &textwidth : "OFF") . " | formatoptions: " . &formatoptions
+endfunction
+
+nnoremap <F5> :call ToggleTextWidth()<CR>
+
+
 " Function for adding underline to title
 function! InsertLineWithCharacter()
     let char = input('Enter the character to repeat (1: =, 2: -, 3: ~, 4: ^, 5: ") : ')
