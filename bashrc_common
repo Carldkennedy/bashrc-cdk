@@ -16,6 +16,7 @@ export VIMINIT="source ~/bashrc-cdk/vimrc"
 export EDITOR=vim
 export GPG_TTY=$(tty)
 export SQUEUE_FORMAT="%.7i %.9P %.4q %.8Q %.25j %.8u %.2t %.6D %16R %5C %10m %%.9M %11l %11L %13b %80Z" 
+export SQUEUE_SORT="t,p,P"
 export SACCT_FORMAT="JobID,CPUTime%16,ExitCode,JobName%30,MaxRSS,MaxVMSize,MaxDiskRead,MaxDiskWrite,ReqCPUS,ReqMem,ReqNodes,NNodes,NodeList,State,Start,End,Elaps,QOS,WorkDir%80"
 PATH="$PATH:$HOME/bashrc-cdk/bin/.local/scripts"
 # vi-style key bindings on command line 
