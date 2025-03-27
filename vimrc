@@ -2,7 +2,7 @@
 :set background=dark
 :set number
 :set wildmenu
-:set textwidth = 80
+:set textwidth=80
 syntax on
 :augroup numbertoggle
 :  autocmd!
