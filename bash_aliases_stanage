@@ -39,4 +39,6 @@ alias ebsj='eb-staging -drl --job --job-cores 32 --job-max-walltime 8 --job-eb-c
 alias eb='echo NO EB!'
 alias hooks="vim /opt/apps/testapps/common/easybuild/hooks/default.py"
 
+alias kill_zombie_srun='ps -u "$USER" -l | awk '"'"'$14 ~ /^(srun|sleep)$/ { print $4 }'"'"' | xargs -r kill -9'
+
 
