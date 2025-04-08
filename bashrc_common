@@ -340,7 +340,7 @@ vline() {
 }
 
 fzg() {
-   git grep --line-number . | fzf --delimiter : --nth 3.. --bind "enter:become(vim {1} +{2})"
+    git grep --line-number . | fzf --delimiter : --nth 3.. --bind "enter:become(vim {1} +{2})"
 }
 
 fzge() {
