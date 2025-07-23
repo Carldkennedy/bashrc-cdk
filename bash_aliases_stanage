@@ -13,6 +13,8 @@ alias sa='srun --cpus-per-task=12 --partition=gpu --qos=gpu --mem=82G --gres=gpu
 alias Seff='sacct -u $USER -S $(date +%Y-%m-%d -d "2 weeks ago") -E $(date +%Y-%m-%d) --state=COMPLETED --format=JobID%30 --noheader |  grep -v "\." | while read -r job_id; do seff "$job_id"; done | grep -e "Effi\|ID"'
 alias Seff2='sacct -u $USER -S $(date +%Y-%m-%d -d "2 weeks ago") -E $(date +%Y-%m-%d) --state=COMPLETED --format=JobID%30 --noheader |  grep -v "\." | while read -r job_id; do seff "$job_id"; done'
 alias ms='module spider'
+alias sinfoR='sinfo -R --format="%70E %12u %20H %10T %N"'
+
 
 alias modeb="cd /opt/apps/testapps/common/modules" 
 alias modavail="module -t --redirect avail 2>&1"

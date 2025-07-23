@@ -14,9 +14,12 @@ alias modnorm="module use /usr/local/modulefiles/live/eb/all; module use /usr/lo
 alias partition_util="sinfo -o '%.18P %.8a %.8D %.4t %.10C %.6f %.6u %.4m %.20E'"
 alias gpu_state='sinfo -p dcs-gpu -N -O "NodeList,Available,Gres,GresUsed,CPUsState"'
 alias cav='sinfo -o "%.30n %.20f %.20G %.20T %.20O %.20P %.10e" | less'
+alias sinfoR='sinfo -R --format="%70E %12u %20H %10T %N"'
+
 #Easybuild
 alias easycfgs="cd /usr/local/packages/common/EasyBuild/4.4.0/easybuild/easyconfigs"
 alias cust='echo /usr/local/packages/live/eb/etc/tuos/easyconfigs'
 alias ebcfgs="cd /usr/local/modulefiles/common/EasyBuild" ### EasyBuild Configuration
 ## scontrol show job <jobid>                ## scontrol show -dd job <jobid> to have Slurm display the content of the submission script it stored, 
 ## scontrol write batch_script <jobid>      ## and in newer versions of Slurm (17.11 and after). Only works for self?
+
