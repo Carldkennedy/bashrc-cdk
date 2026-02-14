@@ -1,27 +1,118 @@
 # Common aliases
-alias bashrc="echo -e 'https://github.com/Carldkennedy/bashrc-cdk/edit/main/bashrc_${hostname}\nhttps://github.com/Carldkennedy/bashrc-cdk/edit/main/bashrc_common'"
-alias ale="echo -e 'https://github.com/Carldkennedy/bashrc-cdk/edit/main/bash_aliases_${hostname}\nhttps://github.com/Carldkennedy/bashrc-cdk/edit/main/bash_aliases_common'"
-alias bl="echo -e '\n${hostname}' && cat ~/bashrc-cdk/bashrc_"${hostname}" | grep -o '.*()'&& echo -e '\nCOMMON' && cat ~/bashrc-cdk/bashrc_common | grep -o '.*()'"
-alias al="more ~/bashrc-cdk/bash_aliases_"${hostname}" ~/bashrc-cdk/bash_aliases_common"
-alias alg="cat ~/bashrc-cdk/bash_aliases_"${hostname}" ~/bashrc-cdk/bash_aliases_common |grep -i"
-alias sc="more ~/bashrc-cdk/sc_${hostname} ~/bashrc-cdk/sc_common"
-alias sce="echo -e 'https://github.com/Carldkennedy/bashrc-cdk/edit/main/sc_${hostname}\nhttps://github.com/Carldkennedy/bashrc-cdk/edit/main/sc_common'"
-alias scg="cat ~/bashrc-cdk/sc_${hostname} ~/bashrc-cdk/sc_common | grep -i"
+for name in bashrc ale bl al alg sc sce scg; do
+  unalias "$name" 2>/dev/null
+done
+bashrc() {
+  local host="${hostname:-unknown}"
+  printf '%s\n%s\n' \
+    "https://github.com/Carldkennedy/bashrc-cdk/edit/main/bashrc_${host}" \
+    "https://github.com/Carldkennedy/bashrc-cdk/edit/main/bashrc_common"
+}
+
+ale() {
+  local host="${hostname:-unknown}"
+  printf '%s\n%s\n' \
+    "https://github.com/Carldkennedy/bashrc-cdk/edit/main/bash_aliases_${host}" \
+    "https://github.com/Carldkennedy/bashrc-cdk/edit/main/bash_aliases_common"
+}
+
+bl() {
+  local host="${hostname:-unknown}"
+  printf '\n%s\n' "$host"
+  if [[ -f "$HOME/bashrc-cdk/bashrc_${host}" ]]; then
+    grep -o '.*()' "$HOME/bashrc-cdk/bashrc_${host}"
+  fi
+  printf '\nCOMMON\n'
+  grep -o '.*()' "$HOME/bashrc-cdk/bashrc_common"
+}
+
+al() {
+  local host="${hostname:-unknown}"
+  local files=()
+  if [[ -f "$HOME/bashrc-cdk/bash_aliases_${host}" ]]; then
+    files+=("$HOME/bashrc-cdk/bash_aliases_${host}")
+  fi
+  if [[ -f "$HOME/bashrc-cdk/bash_aliases_common" ]]; then
+    files+=("$HOME/bashrc-cdk/bash_aliases_common")
+  fi
+  if [[ -f "$HOME/.bash_aliases" ]]; then
+    files+=("$HOME/.bash_aliases")
+  fi
+  {
+    for file in "${files[@]}"; do
+      printf '\n### %s\n' "$(basename "$file")"
+      cat "$file"
+    done
+  } | more
+}
+
+alg() {
+  local host="${hostname:-unknown}"
+  local pattern="$*"
+  local files=()
+  if [[ -z "$pattern" ]]; then
+    printf 'Usage: alg <pattern>\n' >&2
+    return 2
+  fi
+  if [[ -f "$HOME/bashrc-cdk/bash_aliases_${host}" ]]; then
+    files+=("$HOME/bashrc-cdk/bash_aliases_${host}")
+  fi
+  files+=("$HOME/bashrc-cdk/bash_aliases_common")
+  grep -i -- "$pattern" "${files[@]}"
+}
+
+sc() {
+  local host="${hostname:-unknown}"
+  more "$HOME/bashrc-cdk/sc_${host}" "$HOME/bashrc-cdk/sc_common"
+}
+
+sce() {
+  local host="${hostname:-unknown}"
+  printf '%s\n%s\n' \
+    "https://github.com/Carldkennedy/bashrc-cdk/edit/main/sc_${host}" \
+    "https://github.com/Carldkennedy/bashrc-cdk/edit/main/sc_common"
+}
+
+scg() {
+  local host="${hostname:-unknown}"
+  cat "$HOME/bashrc-cdk/sc_${host}" "$HOME/bashrc-cdk/sc_common" | grep -i "$@"
+}
+
 alias less="less -R"
 # Watching changes in ps aux output
 alias pswatch="watch -n 0.2 'ps aux | sort > /tmp/ps1 && sleep 0.2 && ps aux | sort > /tmp/ps2 && comm -13 /tmp/ps1 /tmp/ps2'"
-alias pslog="while true; do echo -e "\n$(date)"; comm -13 <(ps aux | sort) <(sleep 0.1 && ps aux | sort); sleep 0.1; done >> ps.log"
-alias commands="echo $PATH | tr ':' '\n' | xargs ls | sort -u"
+pslog() {
+  while true; do
+    printf '\n%s\n' "$(date)"
+    comm -13 <(ps aux | sort) <(sleep 0.1 && ps aux | sort)
+    sleep 0.1
+  done >> ps.log
+}
+commands() {
+  echo "$PATH" | tr ':' '\n' | xargs ls | sort -u
+}
 alias watchdir='watch -n1 "echo $PWD; ls"'
 
 alias dt='date -u +%Y-%m-%dT%H:%M:%S%Z'
 alias print_path='awk '\''BEGIN{gsub(":", "\n", ENVIRON[ARGV[1]]); print ENVIRON[ARGV[1]]}'\'''
 
 alias ports='ss -plunt'
-alias nocomment="grep -Ev '''^(#|$)'''" ## Usage: nocomment /etc/squid.conf
+nocomment() {
+  grep -Ev '^(#|$)' "$@"
+} ## Usage: nocomment /etc/squid.conf
 alias cl="clear"
 alias moduel="module"
-alias hello="clear;echo "QUOTA"; quota;logadog; echo "BRANCHES"; git branch -vv;echo "STATUS"; git status; ls"
+hello() {
+  clear
+  echo "QUOTA"
+  quota
+  logadog
+  echo "BRANCHES"
+  git branch -vv
+  echo "STATUS"
+  git status
+  ls
+}
 alias mvlgs="[[ -d .logs ]] || mkdir .logs; mv *.log *.out *.err .logs/ 2>/dev/null || true; mv .logs/log.log ./ 2>/dev/null || true"
 alias psaux="ps axo user:20,pid,pcpu,pmem,vsz,rss,tty,stat,start,time,comm"
 alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
@@ -37,16 +128,18 @@ alias l='ls -CF'
 alias lt='ls -lrath'
 alias l.='ls -d .* --color=auto'
 alias lst="ls -la --time-style=full-isols -la --time-style=full-iso"
-alias cath="cat "$1" | column -t"
-alias catl="cat $(ls -t "$1"* | head -1)"
+cath() {
+  cat "$@" | column -t
+}
 alias out='cat "$(ls -t *.out | head -n 1)"'
+alias err='cat "$(ls -t *.err | head -n 1)"'
 
 # some more ls aliases
 alias cls="cd .. ;ls"
 alias ..='cd ..'; alias .2='cd ../../'; alias .3='cd ../../../'; alias .4='cd ../../../../' ; alias .5='cd ../../../../..'
 alias pd="pushd -0" #jump between last two directories
 # size and counts
-alias countfiles="du -a | cut -d/ -f2 | sort | uniq -c | sort -n" #r"
+alias countfiles="du -a | cut -d/ -f2 | sort | uniq -c | sort -n"
 alias sz0="du -hcs"; alias sz1="du -hcs */"; alias sz2="du -hcs */*"
 alias sza="du -had 1"; # include hidden
 
@@ -57,24 +150,68 @@ alias gita="git add -A; git status"
 alias gitu="git add -u && git commit -m"
 alias gitc="git commit -m"
 alias logadog="git log --all --decorate --oneline --graph"
-alias gitkeep="find . -type d -empty -not -path "./.git/*" -exec touch {}/.gitkeep \;" # To add a .gitkeep file to all empty directories in current directory and all subdirectories
+alias gitkeep='find . -type d -empty -not -path "./.git/*" -exec touch {}/.gitkeep \;' # To add a .gitkeep file to all empty directories in current directory and all subdirectories
 alias gitlog="source ~/scr/utils/git_info.sh"
 alias diff="diff --color=always"
 
 # Tmux
-alias tnew="tmux new -s $(basename $PWD)"
-alias told="tmux attach -t $(basename $PWD)"
+tnew() {
+  tmux new -s "$(basename "$PWD")"
+}
+told() {
+  tmux attach -t "$(basename "$PWD")"
+}
 alias myses="tmux new-session -A -s mysession"
 alias update-ssh-sock='export SSH_AUTH_SOCK=$(ls -t /tmp/ssh-*/agent.* | head -n 1)' # Needed in old tmux session for agent forwarding
 
 # Monitoring
 
-alias nvsg='nvidia-smi --query-gpu=timestamp,gpu_name,gpu_bus_id,utilization.gpu,utilization.memory,memory.used,memory.free --format=csv,nounits | column -t -s ',''
-alias nvsc='nvidia-smi --query-compute-apps=timestamp,gpu_bus_id,pid,process_name,used_gpu_memory --format=csv,nounits | column -t -s ',''
+alias nvsg="nvidia-smi --query-gpu=timestamp,gpu_name,gpu_bus_id,utilization.gpu,utilization.memory,memory.used,memory.free --format=csv,nounits | column -t -s ','"
+alias nvsc="nvidia-smi --query-compute-apps=timestamp,gpu_bus_id,pid,process_name,used_gpu_memory --format=csv,nounits | column -t -s ','"
 
 # fzf fuzzy search
 alias fzp='fzf --preview "cat {}"'
 alias fzh='history | fzf'
+fcd() {
+  local dir
+  dir=$(find . -type d -not -path '*/.git/*' 2>/dev/null | fzf) && cd "$dir"
+}
+fkill() {
+  local pids
+  pids=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
+  if [[ -n "$pids" ]]; then
+    kill $pids
+  fi
+}
+
+pathls() {
+  echo "$PATH" | tr ':' '\n'
+}
+pathadd() {
+  local dir="$1"
+  [[ -n "$dir" ]] || return 1
+  case ":$PATH:" in
+    *":$dir:"*) ;;
+    *) PATH="$PATH:$dir" ;;
+  esac
+}
+pathprepend() {
+  local dir="$1"
+  [[ -n "$dir" ]] || return 1
+  case ":$PATH:" in
+    *":$dir:"*) ;;
+    *) PATH="$dir:$PATH" ;;
+  esac
+}
+pathrm() {
+  local dir="$1" newpath
+  [[ -n "$dir" ]] || return 1
+  IFS=':' read -r -a parts <<< "$PATH"
+  for part in "${parts[@]}"; do
+    [[ "$part" == "$dir" ]] && continue
+    newpath="${newpath:+$newpath:}$part"
+  done
+  PATH="$newpath"
+}
 # Misc
 alias ssh-nopubkey='ssh -o PubkeyAuthentication=no'
-

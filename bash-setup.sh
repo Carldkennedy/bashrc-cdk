@@ -4,8 +4,6 @@ assign_hostname() {
     echo "bessemer"
   elif [[ $HOSTNAME == *stanage* ]]; then
     echo "stanage"
-  elif [[ $HOSTNAME == *sharc* ]]; then
-    echo "sharc"
   else
     echo "unknown"
   fi

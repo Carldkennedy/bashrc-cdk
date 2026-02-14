@@ -17,7 +17,7 @@ HISTCONTROL=ignoredups:erasedups
 # When the shell exits, append to the history file instead of overwriting it
 shopt -s histappend
 # After each command, append to the history file and reread it
-PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
+PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -n"
 export VIMINIT="source ~/bashrc-cdk/vimrc"
 export EDITOR=vim
 export GPG_TTY=$(tty)
@@ -28,7 +28,7 @@ PATH="$PATH:$HOME/bashrc-cdk/bin/.local/scripts"
 # vi-style key bindings on command line 
 set -o vi
 # custom key bindings
-source ~/bashrc-cdk/custom_bindings.sh
+[[ -f ~/bashrc-cdk/custom_bindings.sh ]] && source ~/bashrc-cdk/custom_bindings.sh
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
 ############ Common functions ########################## 
@@ -115,18 +115,16 @@ alias gitd='sortBranchCommits'
 
 assign_hostname() {
   if [[ "$HOSTNAME" == *"bessemer"* ]]; then
-    hostname="bessemer"
+    printf '%s\n' "bessemer"
   elif [[ "$HOSTNAME" == *"stanage"* ]]; then
-    hostname="stanage"
+    printf '%s\n' "stanage"
   elif [[ "$HOSTNAME" == *"sharc"* ]]; then
-    hostname="sharc"
+    printf '%s\n' "sharc"
   else
-    hostname="unknown"
+    printf '%s\n' "unknown"
   fi
-  echo $hostname
 }
-# call the function
-assign_hostname
+hostname="$(assign_hostname)"
 
 checksum() {
   for file in "$@"
@@ -265,7 +263,7 @@ watchlog() {
 sysinfo() {
   echo "OS version: $(lsb_release -d | awk '{print $2,$3,$4}')"
   echo "Kernel version: $(uname -r)"
-  echo "CPU usage: $(top -bn1 | grep "Cpu(s)" | awk '{print $2 + $4}')%"
+  echo "CPU usage: $(top -bn1 | grep 'Cpu(s)' | awk '{print $2 + $4}')%"
   echo "Memory usage: $(free -m | awk 'NR==2{printf "%.2f%%", $3/$2*100}')"
   echo ""
   echo "Top 5 processes by CPU usage:"
@@ -382,9 +380,8 @@ bk() {
     echo "Backed up file $1"
 }
 
-if tmux -V | grep -qE "^[2-9]\."; then
+if command -v tmux >/dev/null 2>&1 && tmux -V | grep -qE "^[2-9]\."; then
   if [ ! -d ~/.tmux/plugins/tpm ]; then
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
   fi
 fi
-
