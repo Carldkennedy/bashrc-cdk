@@ -1,4 +1,7 @@
 # Common aliases
+for name in bashrc ale bl al alg sc sce scg; do
+  unalias "$name" 2>/dev/null
+done
 bashrc() {
   local host="${hostname:-unknown}"
   printf '%s\n%s\n' \
@@ -25,12 +28,37 @@ bl() {
 
 al() {
   local host="${hostname:-unknown}"
-  more "$HOME/bashrc-cdk/bash_aliases_${host}" "$HOME/bashrc-cdk/bash_aliases_common"
+  local files=()
+  if [[ -f "$HOME/bashrc-cdk/bash_aliases_${host}" ]]; then
+    files+=("$HOME/bashrc-cdk/bash_aliases_${host}")
+  fi
+  if [[ -f "$HOME/bashrc-cdk/bash_aliases_common" ]]; then
+    files+=("$HOME/bashrc-cdk/bash_aliases_common")
+  fi
+  if [[ -f "$HOME/.bash_aliases" ]]; then
+    files+=("$HOME/.bash_aliases")
+  fi
+  {
+    for file in "${files[@]}"; do
+      printf '\n### %s\n' "$(basename "$file")"
+      cat "$file"
+    done
+  } | more
 }
 
 alg() {
   local host="${hostname:-unknown}"
-  cat "$HOME/bashrc-cdk/bash_aliases_${host}" "$HOME/bashrc-cdk/bash_aliases_common" | grep -i "$@"
+  local pattern="$*"
+  local files=()
+  if [[ -z "$pattern" ]]; then
+    printf 'Usage: alg <pattern>\n' >&2
+    return 2
+  fi
+  if [[ -f "$HOME/bashrc-cdk/bash_aliases_${host}" ]]; then
+    files+=("$HOME/bashrc-cdk/bash_aliases_${host}")
+  fi
+  files+=("$HOME/bashrc-cdk/bash_aliases_common")
+  grep -i -- "$pattern" "${files[@]}"
 }
 
 sc() {
