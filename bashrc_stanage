@@ -139,8 +139,7 @@ wait_for_job_completion() {
     done
     local COMPLETION_TIME=$(date "+%Y-%m-%d %H:%M:%S")
     local MESSAGE="Job $JOB_ID has finished at $COMPLETION_TIME"
-    echo -e "\n$MESSAGE:wq
-." > /dev/tty
+    printf '\n%s\n' "$MESSAGE" > /dev/tty
   ) &
   echo "Job $JOB_ID is being monitored in the background."
 }
@@ -152,4 +151,3 @@ flssh() {
 sef() {
 	seff $1 | tee ${1}.seff
 }
-
