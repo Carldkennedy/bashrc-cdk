@@ -100,20 +100,11 @@ alias l='ls -CF'
 alias lt='ls -lrath'
 alias l.='ls -d .* --color=auto'
 alias lst="ls -la --time-style=full-isols -la --time-style=full-iso"
-catl() {
-  local pattern="${1:-}"
-  local latest
-  if [[ -n "$pattern" ]]; then
-    latest=$(ls -t "${pattern}"* 2>/dev/null | head -1)
-  else
-    latest=$(ls -t 2>/dev/null | head -1)
-  fi
-  [[ -n "$latest" ]] && cat "$latest"
-}
 cath() {
   cat "$@" | column -t
 }
 alias out='cat "$(ls -t *.out | head -n 1)"'
+alias err='cat "$(ls -t *.err | head -n 1)"'
 
 # some more ls aliases
 alias cls="cd .. ;ls"
@@ -153,5 +144,46 @@ alias nvsc="nvidia-smi --query-compute-apps=timestamp,gpu_bus_id,pid,process_nam
 # fzf fuzzy search
 alias fzp='fzf --preview "cat {}"'
 alias fzh='history | fzf'
+fcd() {
+  local dir
+  dir=$(find . -type d -not -path '*/.git/*' 2>/dev/null | fzf) && cd "$dir"
+}
+fkill() {
+  local pids
+  pids=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
+  if [[ -n "$pids" ]]; then
+    kill $pids
+  fi
+}
+
+pathls() {
+  echo "$PATH" | tr ':' '\n'
+}
+pathadd() {
+  local dir="$1"
+  [[ -n "$dir" ]] || return 1
+  case ":$PATH:" in
+    *":$dir:"*) ;;
+    *) PATH="$PATH:$dir" ;;
+  esac
+}
+pathprepend() {
+  local dir="$1"
+  [[ -n "$dir" ]] || return 1
+  case ":$PATH:" in
+    *":$dir:"*) ;;
+    *) PATH="$dir:$PATH" ;;
+  esac
+}
+pathrm() {
+  local dir="$1" newpath
+  [[ -n "$dir" ]] || return 1
+  IFS=':' read -r -a parts <<< "$PATH"
+  for part in "${parts[@]}"; do
+    [[ "$part" == "$dir" ]] && continue
+    newpath="${newpath:+$newpath:}$part"
+  done
+  PATH="$newpath"
+}
 # Misc
 alias ssh-nopubkey='ssh -o PubkeyAuthentication=no'
