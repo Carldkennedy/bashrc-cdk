@@ -17,7 +17,7 @@ This repo provides shared bashrc/aliases plus host-specific overrides.
 
 ## Host mapping
 
-- `bessemer`, `stanage`, `sharc`, `jade` map to `bashrc_*`, `bash_aliases_*`, and `sc_*`
+- `stanage`, `jade` map to `bashrc_*`, `bash_aliases_*`, and `sc_*`
 
 ## Shortcuts
 
