@@ -33,11 +33,11 @@ alias modcache="/opt/apps/testapps/common/module-system/current/installation/Lmo
 alias modrocky='MODULEPATH="" && module use /opt/apps/tuos/{common,el9}/modules/live/all'
 
 #Easybuild
-alias easycfgs="cd /opt/apps/testapps/common/easybuild/EasyBuild/${EBVERSIONEASYBUILD}/easybuild/easyconfigs/"
+alias easycfgs='cd /opt/apps/testapps/common/easybuild/EasyBuild/"${EBVERSIONEASYBUILD}"/easybuild/easyconfigs/'
 alias cust="cd /opt/apps/testapps/common/easybuild/easyconfigs/stanage/easyconfigs"
-alias ebconfig='less /opt/apps/testapps/el7/easybuild-configs/staging/easybuild-config-native.cfg'
+alias ebconfig='less /opt/apps/testapps/"${MODULESOSCODE}"/easybuild-configs/staging/easybuild-config-native.cfg'
 alias modeasy="modbegin; module load EasyBuild"
-alias deadmodsym="find /opt/apps/testapps/el7/modules/ -type l -print0 | xargs -0 -n1 sh -c 'test ! -e "$0" && echo "$0"'"
+alias deadmodsym='find /opt/apps/testapps/"${MODULESOSCODE}"/modules/ -type l -print0 | xargs -0 -n1 sh -c 'test ! -e "$0" && echo "$0"''
 alias ebsj='eb-staging -drl --job --job-cores 32 --job-max-walltime 8 --job-eb-cmd "unset MODULEPATH && ml use /opt/apps/testapps/common/modules/easybuild-only/all && ml use /opt/apps/testapps/el7/modules/staging/all && ml EasyBuild && eb"'
 
 alias eb='echo NO EB!'
