@@ -142,6 +142,7 @@ alias pd="pushd -0" #jump between last two directories
 alias countfiles="du -a | cut -d/ -f2 | sort | uniq -c | sort -n"
 alias sz0="du -hcs"; alias sz1="du -hcs */"; alias sz2="du -hcs */*"
 alias sza="du -had 1"; # include hidden
+alias mem="df -hT -t tmpfs; df -ih -t tmpfs; df -hT /tmp /var/tmp"
 
 ## git
 alias gits="git status"
