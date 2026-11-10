@@ -20,7 +20,7 @@ shopt -s histappend
 PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -n"
 export VIMINIT="source ~/bashrc-cdk/vimrc"
 export EDITOR=vim
-export GPG_TTY=$(tty)
+if [ -t 0 ]; then export GPG_TTY="$(tty)"; fi
 export SQUEUE_FORMAT="%.7i %.9P %.4q %.8Q %.25j %.8u %.2t %.6D %16R %5C %10m %%.9M %11l %11L %13b %80Z" 
 export SQUEUE_SORT="t,p,P"
 export SACCT_FORMAT="JobID,CPUTime%16,ExitCode,JobName%30,MaxRSS,MaxVMSize,MaxDiskRead,MaxDiskWrite,ReqCPUS,ReqMem,ReqNodes,NNodes,NodeList,State,Start,End,Elaps,QOS,WorkDir%80"
@@ -98,7 +98,6 @@ extract () {
 getBranchCommits() {
     # Use `git for-each-ref` to get information for each branch
     git for-each-ref --shell --format \
-        # For each branch, run a `git log` command to get the most recent commit information
         "git --no-pager log -1 --date=iso --format='%%ad '%(align:left,55)%(refname:short)%(end)' %%h %%s' \$(git merge-base %(refname:short) main);" \
         refs/heads
 }
@@ -380,8 +379,4 @@ bk() {
     echo "Backed up file $1"
 }
 
-if command -v tmux >/dev/null 2>&1 && tmux -V | grep -qE "^[2-9]\."; then
-  if [ ! -d ~/.tmux/plugins/tpm ]; then
-    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-  fi
-fi
+# Install tmux plugins explicitly rather than during shell startup.

@@ -58,12 +58,15 @@ alg() {
     files+=("$HOME/bashrc-cdk/bash_aliases_${host}")
   fi
   files+=("$HOME/bashrc-cdk/bash_aliases_common")
+  [[ -f "$HOME/.bash_aliases" ]] && files+=("$HOME/.bash_aliases")
   grep -i -- "$pattern" "${files[@]}"
 }
 
 sc() {
   local host="${hostname:-unknown}"
-  more "$HOME/bashrc-cdk/sc_${host}" "$HOME/bashrc-cdk/sc_common"
+  local files=("$HOME/bashrc-cdk/sc_common")
+  [[ -f "$HOME/bashrc-cdk/sc_${host}" ]] && files=("$HOME/bashrc-cdk/sc_${host}" "${files[@]}")
+  more "${files[@]}"
 }
 
 sce() {
@@ -75,7 +78,9 @@ sce() {
 
 scg() {
   local host="${hostname:-unknown}"
-  cat "$HOME/bashrc-cdk/sc_${host}" "$HOME/bashrc-cdk/sc_common" | grep -i "$@"
+  local files=("$HOME/bashrc-cdk/sc_common")
+  [[ -f "$HOME/bashrc-cdk/sc_${host}" ]] && files=("$HOME/bashrc-cdk/sc_${host}" "${files[@]}")
+  grep -i -- "$@" "${files[@]}"
 }
 
 alias less="less -R"
@@ -89,7 +94,7 @@ pslog() {
   done >> ps.log
 }
 commands() {
-  echo "$PATH" | tr ':' '\n' | xargs ls | sort -u
+  compgen -c | sort -u
 }
 alias watchdir='watch -n1 "echo $PWD; ls"'
 
@@ -130,6 +135,11 @@ alias l.='ls -d .* --color=auto'
 alias lst="ls -la --time-style=full-isols -la --time-style=full-iso"
 cath() {
   cat "$@" | column -t
+}
+catl() {
+  local newest
+  newest=$(ls -t -- "${1}"* 2>/dev/null | head -n 1)
+  [[ -n "$newest" ]] && cat -- "$newest"
 }
 alias out='cat "$(ls -t *.out | head -n 1)"'
 alias err='cat "$(ls -t *.err | head -n 1)"'
