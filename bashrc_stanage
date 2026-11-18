@@ -151,3 +151,20 @@ flssh() {
 sef() {
 	seff $1 | tee ${1}.seff
 }
+
+jobwait() {
+    if [[ $# -ne 1 ]]; then
+        echo "Usage: jobwait JOBID" >&2
+        return 2
+    fi
+
+    SLURM_TIME_FORMAT=%s sacct -j "$1" -X -n -P \
+        -o JobID,Submit,Start |
+    awk -F'|' '
+        $2 ~ /^[0-9]+$/ && $3 ~ /^[0-9]+$/ && ($3+0) >= ($2+0) {
+            printf "%s: %.1f minutes\n", $1, ($3-$2)/60
+            next
+        }
+        { printf "%s: wait time unavailable (job may not have started)\n", $1 }
+    '
+}
